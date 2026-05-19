@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vampire Survivors Clone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+
+        #gameCanvas {
+            border: 3px solid #444;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            background-color: #1a1a1a;
+        }
+
+        .controls {
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .controls h3 {
+            margin-bottom: 10px;
+        }
+
+        .controls p {
+            margin: 5px 0;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    
+    <div class="controls">
+        <h3>Controls</h3>
+        <p><strong>Move:</strong> WASD or Arrow Keys</p>
+        <p><strong>Attack:</strong> Automatic (targets nearest enemy)</p>
+        <p><strong>Objective:</strong> Survive and defeat enemies!</p>
+    </div>
+
+    <!-- Load scripts in correct order: base classes first, then derived classes -->
+    <script src="Background.js"></script>
+    <script src="Entity.js"></script>
+    <script src="Projectile.js"></script>
+    <script src="Player.js"></script>
+    <script src="Enemy.js"></script>
+    <script src="Game.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
