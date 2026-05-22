@@ -54,13 +54,30 @@
         <h3>Controls</h3>
         <p><strong>Move:</strong> WASD or Arrow Keys</p>
         <p><strong>Attack:</strong> Automatic (targets nearest enemy)</p>
-        <p><strong>Objective:</strong> Survive and defeat enemies!</p>
+        <p><strong>Ultimate:</strong> E Key</p>
+        <p><strong>Dash:</strong> Space Bar</p>
+        <p><strong>Debug:</strong> U (toggle), L (instant level up)</p>
+        <p><strong>Objective:</strong> Survive and collect spells!</p>
     </div>
 
-    <!-- Load scripts in correct order: base classes first, then derived classes -->
+    <!-- Load scripts in correct order -->
     <script src="Background.js"></script>
     <script src="Entity.js"></script>
     <script src="Projectile.js"></script>
+    
+    <!-- Spell System -->
+    <script src="Spell.js"></script>
+    <script src="SpellTypes/ProjectileSpell.js"></script>
+    <script src="SpellTypes/OrbitalSpell.js"></script>
+    <script src="SpellTypes/AOESpell.js"></script>
+    <script src="SpellTypes/StaticAOESpell.js"></script>
+    <script src="SpellTypes/SkyFallSpell.js"></script>
+    <script src="SpellTypes/ShieldSpell.js"></script>
+    <script src="SpellTypes/MeleeSpell.js"></script>
+    <script src="SpellData.js"></script>
+    <script src="SpellManager.js"></script>
+    
+    <!-- Game Classes -->
     <script src="Player.js"></script>
     <script src="Enemy.js"></script>
     <script src="Game.js"></script>

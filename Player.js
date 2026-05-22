@@ -6,7 +6,7 @@ class Player extends Entity {
         super(x, y, 256, 256, 250, 100, 'Sprites/Idle.png', 8); // 8 frames for idle (4x scale)
         this.game = game;
         this.keys = {};
-        this.weapons = ['thunder']; // Start with thunder weapon
+        this.weapons = ['thunder']; // Start with thunder weapon (legacy)
         this.lastShootTime = 0;
         this.shootInterval = 500; // Shoot every 500ms
         this.velocityX = 0;
@@ -18,6 +18,10 @@ class Player extends Entity {
         this.xpToNextLevel = 50;
         this.projectileCount = 1; // Number of projectiles per shot
         this.projectileDamage = 20; // Base damage
+        this.infiniteHP = false; // Debug mode infinite HP
+        
+        // Spell system
+        this.spellManager = new SpellManager(this);
         
         // Load different sprite animations
         this.animations = {
@@ -43,11 +47,32 @@ class Player extends Entity {
     setupInputListeners() {
         window.addEventListener('keydown', (e) => {
             this.keys[e.key.toLowerCase()] = true;
+            
+            // Ultimate ability (E key) - kept for backwards compatibility
+            if (e.key.toLowerCase() === 'e') {
+                this.spellManager.castUltimate();
+            }
+            
+            // Dash ability (Space key)
+            if (e.key === ' ' || e.key.toLowerCase() === 'space') {
+                this.spellManager.castDash();
+            }
         });
 
         window.addEventListener('keyup', (e) => {
             this.keys[e.key.toLowerCase()] = false;
         });
+    }
+    
+    activateUltimate(index) {
+        // Ultimate abilities activated with number keys 1-5
+        // For now, cast the equipped ultimate
+        // TODO: Implement multiple ultimate slots
+        if (index === 0) {
+            this.spellManager.castUltimate();
+        } else {
+            console.log(`Ultimate slot ${index + 1} not implemented yet`);
+        }
     }
 
     handleInput() {
@@ -179,11 +204,31 @@ class Player extends Entity {
                 break;
         }
     }
+    
+    takeDamage(amount) {
+        // Infinite HP in debug mode
+        if (this.infiniteHP) {
+            return;
+        }
+        
+        // Check for active shields
+        const shields = this.spellManager.getActiveShields();
+        for (const shield of shields) {
+            amount = shield.absorbDamage(amount);
+            if (amount <= 0) return; // All damage absorbed
+        }
+        
+        // Apply remaining damage
+        super.takeDamage(amount);
+    }
 
     update(deltaTime) {
         this.handleInput();
         this.move(deltaTime);
         this.shoot(Date.now());
+        
+        // Update spell system
+        this.spellManager.update(deltaTime);
         
         // Choose animation based on movement
         if (this.velocityX !== 0 || this.velocityY !== 0) {
@@ -206,5 +251,13 @@ class Player extends Entity {
         
         // Call parent update for animation
         super.update(deltaTime);
+    }
+    
+    render(ctx, cameraX, cameraY) {
+        // Render player sprite
+        super.render(ctx, cameraX, cameraY);
+        
+        // Render spell effects
+        this.spellManager.render(ctx, cameraX, cameraY);
     }
 }

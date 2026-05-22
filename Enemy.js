@@ -3,13 +3,19 @@
 // ============================================
 class Enemy extends Entity {
     constructor(x, y, player) {
-    super(x, y, 200, 200, 100, 30, 'Sprites/enemies/frogger_move.png', 14); // Changed from 8 to 14 frames
-    this.player = player;
-    this.damage = 10;
-    this.scoreValue = 10;
-    this.velocityX = 0;
-    this.velocityY = 0;
-}
+        // Scale HP based on game time (every 30 seconds, +20% HP)
+        const game = player.game;
+        const timeMultiplier = 1 + Math.floor(game.gameTime / 30) * 0.2;
+        const scaledHP = Math.floor(100 * timeMultiplier);
+        
+        super(x, y, 200, 200, scaledHP, 30, 'Sprites/enemies/frogger_move.png', 14);
+        this.player = player;
+        this.damage = 10 + Math.floor(game.gameTime / 60) * 5; // +5 damage every minute
+        this.scoreValue = 10;
+        this.velocityX = 0;
+        this.velocityY = 0;
+        this.baseMaxHealth = scaledHP;
+    }
 
     moveTowardsPlayer(deltaTime) {
         const dx = this.player.x - this.x;

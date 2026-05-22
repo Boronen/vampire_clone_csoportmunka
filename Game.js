@@ -21,7 +21,10 @@ class Game {
         this.lastFrameTime = 0;
         this.isPaused = false;
         this.upgradeMenuVisible = false;
-        this.debugMode = false; // Debug hitbox visualization
+        this.upgradeOptions = null;
+        this.debugMode = false;
+        this.debugSpellMenuVisible = false;
+        this.debugSpellMenuScroll = 0;
         this.fontImg = new Image();
         this.fontImg.src = 'Sprites/fonts.png';
     }
@@ -177,46 +180,126 @@ class Game {
     if (this.upgradeMenuVisible) {
         this.renderUpgradeMenu();
     }
+    
+    if (this.debugSpellMenuVisible) {
+        this.renderDebugSpellMenu();
+    }
 }
+    
+    renderDebugSpellMenu() {
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        this.ctx.fillStyle = 'cyan';
+        this.ctx.font = '32px Arial';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillText('DEBUG SPELL MENU', this.canvas.width / 2, 50);
+        
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = '18px Arial';
+        this.ctx.fillText('Type spell ID in console: game.player.spellManager.addSpell("spellId")', this.canvas.width / 2, 80);
+        this.ctx.fillText('Press ESC to close', this.canvas.width / 2, 105);
+        
+        // List all available spells
+        this.ctx.textAlign = 'left';
+        this.ctx.font = '14px monospace';
+        let y = 140;
+        let col = 0;
+        const colWidth = 300;
+        const leftMargin = 50;
+        
+        for (const spellId of Object.keys(SPELL_DATA)) {
+            const spellData = SPELL_DATA[spellId];
+            const hasSpell = this.player.spellManager.discoveredSpells.has(spellId);
+            
+            this.ctx.fillStyle = hasSpell ? '#00ff00' : '#ffffff';
+            const x = leftMargin + col * colWidth;
+            this.ctx.fillText(`${spellId}`, x, y);
+            this.ctx.fillStyle = '#888888';
+            this.ctx.fillText(`${spellData.name}`, x + 10, y + 15);
+            
+            y += 40;
+            if (y > 620) {
+                y = 140;
+                col++;
+            }
+        }
+        
+        this.ctx.textAlign = 'center';
+        this.ctx.fillStyle = 'yellow';
+        this.ctx.font = '16px Arial';
+        this.ctx.fillText('Examples: magicSpell, fireSpin, garlic, electricShield, hammerSmash', this.canvas.width / 2, 670);
+        
+        this.ctx.textAlign = 'left';
+        
+        // Setup ESC key listener
+        if (!this.debugSpellMenuEscListener) {
+            this.debugSpellMenuEscListener = (e) => {
+                if (e.key === 'Escape' && this.debugSpellMenuVisible) {
+                    this.hideDebugSpellMenu();
+                }
+            };
+            window.addEventListener('keydown', this.debugSpellMenuEscListener);
+        }
+    }
 
     showUpgradeMenu() {
         this.isPaused = true;
         this.upgradeMenuVisible = true;
+        // Generate options ONCE when menu opens
+        this.upgradeOptions = this.player.spellManager.getUpgradeOptions(3);
     }
 
     hideUpgradeMenu() {
         this.isPaused = false;
         this.upgradeMenuVisible = false;
+        // Clear options when menu closes
+        this.upgradeOptions = null;
     }
 
     renderUpgradeMenu() {
+        if (!this.upgradeOptions) return; // Safety check
+        
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
         this.ctx.fillStyle = 'gold';
         this.ctx.font = '48px Arial';
         this.ctx.textAlign = 'center';
-        this.ctx.fillText('LEVEL UP!', this.canvas.width / 2, 150);
+        this.ctx.fillText('LEVEL UP!', this.canvas.width / 2, 100);
         
         this.ctx.fillStyle = 'white';
         this.ctx.font = '32px Arial';
-        this.ctx.fillText(`Level ${this.player.level}`, this.canvas.width / 2, 200);
+        this.ctx.fillText(`Level ${this.player.level}`, this.canvas.width / 2, 150);
         
-        const upgrades = [
-            { type: 'health', text: 'Increase Max HP +20', y: 300 },
-            { type: 'projectiles', text: 'More Projectiles +1', y: 380 },
-            { type: 'damage', text: 'Increase Damage +10', y: 460 }
-        ];
-        
-        this.ctx.font = '28px Arial';
-        upgrades.forEach((upgrade, index) => {
-            this.ctx.fillStyle = 'white';
-            this.ctx.fillText(`${index + 1}. ${upgrade.text}`, this.canvas.width / 2, upgrade.y);
+        // Use stored upgrade options (no regeneration!)
+        this.ctx.font = '24px Arial';
+        this.upgradeOptions.forEach((option, index) => {
+            const y = 250 + index * 100;
+            
+            // Color coding: green=new spell, orange=upgrade, cyan=stat
+            let color = '#00ff00';
+            if (option.type === 'upgrade') color = '#ffaa00';
+            if (option.type === 'stat') color = '#00ffff';
+            
+            this.ctx.fillStyle = color;
+            this.ctx.fillText(`${index + 1}. ${option.display}`, this.canvas.width / 2, y);
+            
+            // Show description
+            this.ctx.fillStyle = '#cccccc';
+            this.ctx.font = '18px Arial';
+            const desc = option.description || (option.spell ? option.spell.description : (option.spellData ? option.spellData.description : ''));
+            this.ctx.fillText(desc || '', this.canvas.width / 2, y + 25);
+            this.ctx.font = '24px Arial';
         });
         
         this.ctx.font = '20px Arial';
         this.ctx.fillStyle = 'yellow';
-        this.ctx.fillText('Press 1, 2, or 3 to choose', this.canvas.width / 2, 550);
+        this.ctx.fillText('Press 1, 2, or 3 to choose', this.canvas.width / 2, 580);
+        
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = '16px Arial';
+        this.ctx.fillText('Press 1-5 for Ultimates | Space for Dash', this.canvas.width / 2, 620);
         
         this.ctx.textAlign = 'left';
     }
@@ -225,15 +308,13 @@ class Game {
         window.addEventListener('keydown', (e) => {
             if (!this.upgradeMenuVisible) return;
             
-            if (e.key === '1') {
-                this.player.applyUpgrade('health');
-                this.hideUpgradeMenu();
-            } else if (e.key === '2') {
-                this.player.applyUpgrade('projectiles');
-                this.hideUpgradeMenu();
-            } else if (e.key === '3') {
-                this.player.applyUpgrade('damage');
-                this.hideUpgradeMenu();
+            const keyNum = parseInt(e.key);
+            if (keyNum >= 1 && keyNum <= 3) {
+                const optionIndex = keyNum - 1;
+                if (this.upgradeOptions && this.upgradeOptions[optionIndex]) {
+                    this.player.spellManager.applyUpgrade(this.upgradeOptions[optionIndex]);
+                    this.hideUpgradeMenu();
+                }
             }
         });
     }
@@ -252,7 +333,40 @@ class Game {
                 this.player.gainXP(xpNeeded);
                 console.log('Instant level up!');
             }
+            
+            // Toggle infinite HP with I key (debug)
+            if (e.key.toLowerCase() === 'i' && this.debugMode) {
+                this.player.infiniteHP = !this.player.infiniteHP;
+                if (this.player.infiniteHP) {
+                    this.player.health = this.player.maxHealth;
+                }
+                console.log(`Infinite HP: ${this.player.infiniteHP ? 'ON' : 'OFF'}`);
+            }
+            
+            // Open spell menu with P key (debug)
+            if (e.key.toLowerCase() === 'p' && this.debugMode) {
+                this.showDebugSpellMenu();
+            }
+            
+            // Ultimate abilities (1-5 keys)
+            if (!this.upgradeMenuVisible && !this.debugSpellMenuVisible) {
+                if (e.key >= '1' && e.key <= '5') {
+                    const ultimateIndex = parseInt(e.key) - 1;
+                    this.player.activateUltimate(ultimateIndex);
+                }
+            }
         });
+    }
+    
+    showDebugSpellMenu() {
+        this.isPaused = true;
+        this.debugSpellMenuVisible = true;
+        this.debugSpellMenuScroll = 0;
+    }
+    
+    hideDebugSpellMenu() {
+        this.isPaused = false;
+        this.debugSpellMenuVisible = false;
     }
 
     renderDebugHitboxes(cameraX, cameraY) {
@@ -292,10 +406,109 @@ class Game {
             );
         }
         
+        // Spell hitboxes
+        this.ctx.strokeStyle = 'cyan';
+        this.ctx.lineWidth = 2;
+        for (const spell of this.player.spellManager.getAllSpells()) {
+            const bounds = spell.getBounds();
+            if (bounds.width > 0 && bounds.height > 0) {
+                this.ctx.strokeRect(
+                    bounds.x - cameraX,
+                    bounds.y - cameraY,
+                    bounds.width,
+                    bounds.height
+                );
+            }
+            
+            // Draw spell projectile hitboxes (effects)
+            if (spell.effects) {
+                for (const effect of spell.effects) {
+                    if (effect.getBounds) {
+                        const effectBounds = effect.getBounds();
+                        this.ctx.strokeStyle = 'magenta';
+                        this.ctx.strokeRect(
+                            effectBounds.x - cameraX,
+                            effectBounds.y - cameraY,
+                            effectBounds.width,
+                            effectBounds.height
+                        );
+                    }
+                }
+            }
+            
+            // Draw orbital hitboxes
+            if (spell.orbitals) {
+                for (const orbital of spell.orbitals) {
+                    if (orbital.getBounds) {
+                        const orbitalBounds = orbital.getBounds();
+                        this.ctx.strokeStyle = 'orange';
+                        this.ctx.strokeRect(
+                            orbitalBounds.x - cameraX,
+                            orbitalBounds.y - cameraY,
+                            orbitalBounds.width,
+                            orbitalBounds.height
+                        );
+                    }
+                }
+            }
+            
+            // Draw static AOE zone hitboxes
+            if (spell.zones) {
+                for (const zone of spell.zones) {
+                    this.ctx.strokeStyle = 'purple';
+                    // Draw zone rectangle
+                    this.ctx.strokeRect(
+                        zone.x - cameraX,
+                        zone.y - cameraY,
+                        zone.width,
+                        zone.height
+                    );
+                    // Draw zone radius circle
+                    const zoneCenterX = zone.x + zone.width / 2 - cameraX;
+                    const zoneCenterY = zone.y + zone.height / 2 - cameraY;
+                    this.ctx.beginPath();
+                    this.ctx.arc(zoneCenterX, zoneCenterY, zone.radius, 0, Math.PI * 2);
+                    this.ctx.stroke();
+                }
+            }
+        }
+        
         // Debug text
         this.ctx.fillStyle = 'white';
         this.ctx.font = '16px Arial';
-        this.ctx.fillText('DEBUG MODE (U to toggle, L to level up)', 20, 160);
+        this.ctx.fillText('DEBUG MODE (U: toggle, L: level up, I: infinite HP, P: spell menu)', 20, 160);
+        
+        if (this.player.infiniteHP) {
+            this.ctx.fillStyle = 'lime';
+            this.ctx.fillText('INFINITE HP: ON', 20, 180);
+        }
+        
+        // Enemy scaling info
+        this.ctx.fillStyle = 'yellow';
+        this.ctx.font = '16px Arial';
+        const timeMultiplier = 1 + Math.floor(this.gameTime / 30) * 0.2;
+        const baseEnemyHP = Math.floor(100 * timeMultiplier);
+        const enemyDamage = 10 + Math.floor(this.gameTime / 60) * 5;
+        const nextScaleTime = Math.ceil(this.gameTime / 30) * 30 - this.gameTime;
+        
+        this.ctx.fillText('=== ENEMY SCALING ===', 20, 200);
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(`Game Time: ${Math.floor(this.gameTime)}s`, 20, 220);
+        this.ctx.fillText(`Enemy Base HP: ${baseEnemyHP} (x${timeMultiplier.toFixed(1)})`, 20, 240);
+        this.ctx.fillText(`Enemy Damage: ${enemyDamage}`, 20, 260);
+        this.ctx.fillText(`Next Scale: ${Math.ceil(nextScaleTime)}s`, 20, 280);
+        
+        // Spell list
+        this.ctx.fillStyle = 'cyan';
+        this.ctx.fillText('=== ACTIVE SPELLS ===', 20, 310);
+        const spells = this.player.spellManager.getAllSpells();
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(`Total: ${spells.length}`, 20, 330);
+        let y = 350;
+        for (const spell of spells) {
+            this.ctx.fillText(`- ${spell.name} Lv${spell.level}`, 30, y);
+            y += 20;
+        }
     }
 
     spawnEnemy() {

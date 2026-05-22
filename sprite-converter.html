@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprite Sheet Converter - Multi-row to 1-row</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .upload-section {
+            border: 3px dashed #667eea;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            background: #f8f9ff;
+            transition: all 0.3s;
+        }
+
+        .upload-section.dragover {
+            background: #e0e7ff;
+            border-color: #764ba2;
+            transform: scale(1.02);
+        }
+
+        .upload-section input[type="file"] {
+            display: none;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .upload-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e0e7ff;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .control-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .control-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .info-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .info-box strong {
+            color: #856404;
+        }
+
+        .preview-section {
+            margin-top: 30px;
+        }
+
+        .preview-box {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #e0e7ff;
+        }
+
+        .preview-box h3 {
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .canvas-container {
+            overflow-x: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        canvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4);
+            font-weight: 600;
+        }
+
+        .download-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(17, 153, 142, 0.6);
+        }
+
+        .download-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #e0e7ff;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            color: #667eea;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .error {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Sprite Sheet Converter</h1>
+        <p class="subtitle">Convert multi-row sprite sheets to single-row format</p>
+
+        <div class="upload-section" id="uploadSection">
+            <div class="upload-icon">📤</div>
+            <p style="margin-bottom: 20px; color: #666;">Drag & drop your sprite sheet here or click to browse</p>
+            <input type="file" id="fileInput" accept="image/*">
+            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                Choose Sprite Sheet
+            </button>
+        </div>
+
+        <div id="mainContent" class="hidden">
+            <div class="info-box">
+                <strong>📋 Instructions:</strong> Enter the number of columns and rows in your current sprite sheet. 
+                The tool will automatically convert it to a single horizontal row.
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="columns">Columns (frames wide)</label>
+                    <input type="number" id="columns" min="1" value="4" placeholder="e.g., 4">
+                </div>
+                <div class="control-group">
+                    <label for="rows">Rows (frames tall)</label>
+                    <input type="number" id="rows" min="1" value="2" placeholder="e.g., 2">
+                </div>
+                <div class="control-group">
+                    <label>Original Filename</label>
+                    <input type="text" id="filename" readonly style="background: #e9ecef;">
+                </div>
+            </div>
+
+            <button class="upload-btn" onclick="convertSprite()" style="width: 100%; margin-bottom: 30px;">
+                🔄 Convert to 1-Row Format
+            </button>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-label">Total Frames</div>
+                    <div class="stat-value" id="totalFrames">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Frame Size</div>
+                    <div class="stat-value" id="frameSize">0x0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Output Size</div>
+                    <div class="stat-value" id="outputSize">0x0</div>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-box">
+                    <h3>📊 Original Sprite Sheet</h3>
+                    <div class="canvas-container">
+                        <canvas id="originalCanvas"></canvas>
+                    </div>
+                </div>
+
+                <div class="preview-box">
+                    <h3>✨ Converted (1-Row Format)</h3>
+                    <div class="canvas-container">
+                        <canvas id="convertedCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <button class="download-btn" id="downloadBtn" onclick="downloadSprite()" disabled>
+                💾 Download Converted Sprite
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let uploadedImage = null;
+        let originalFilename = '';
+
+        // File upload handling
+        const fileInput = document.getElementById('fileInput');
+        const uploadSection = document.getElementById('uploadSection');
+        const mainContent = document.getElementById('mainContent');
+
+        fileInput.addEventListener('change', handleFileSelect);
+
+        // Drag and drop
+        uploadSection.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadSection.classList.add('dragover');
+        });
+
+        uploadSection.addEventListener('dragleave', () => {
+            uploadSection.classList.remove('dragover');
+        });
+
+        uploadSection.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadSection.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                loadImage(file);
+            }
+        });
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                loadImage(file);
+            }
+        }
+
+        function loadImage(file) {
+            originalFilename = file.name;
+            document.getElementById('filename').value = originalFilename;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                uploadedImage = new Image();
+                uploadedImage.onload = () => {
+                    mainContent.classList.remove('hidden');
+                    displayOriginal();
+                    
+                    // Auto-detect if it looks like a single row already
+                    const aspectRatio = uploadedImage.width / uploadedImage.height;
+                    if (aspectRatio > 4) {
+                        document.getElementById('rows').value = 1;
+                        document.getElementById('columns').value = Math.round(aspectRatio);
+                    }
+                };
+                uploadedImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function displayOriginal() {
+            const canvas = document.getElementById('originalCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = uploadedImage.width;
+            canvas.height = uploadedImage.height;
+            
+            ctx.drawImage(uploadedImage, 0, 0);
+        }
+
+        function convertSprite() {
+            if (!uploadedImage) return;
+
+            const cols = parseInt(document.getElementById('columns').value) || 1;
+            const rows = parseInt(document.getElementById('rows').value) || 1;
+            
+            const totalFrames = cols * rows;
+            const frameWidth = uploadedImage.width / cols;
+            const frameHeight = uploadedImage.height / rows;
+
+            // Update stats
+            document.getElementById('totalFrames').textContent = totalFrames;
+            document.getElementById('frameSize').textContent = `${Math.floor(frameWidth)}x${Math.floor(frameHeight)}`;
+            document.getElementById('outputSize').textContent = `${Math.floor(frameWidth * totalFrames)}x${Math.floor(frameHeight)}`;
+
+            // Create converted canvas
+            const canvas = document.getElementById('convertedCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = frameWidth * totalFrames;
+            canvas.height = frameHeight;
+
+            // Draw each frame in a single row
+            let frameIndex = 0;
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const sourceX = col * frameWidth;
+                    const sourceY = row * frameHeight;
+                    const destX = frameIndex * frameWidth;
+                    const destY = 0;
+
+                    ctx.drawImage(
+                        uploadedImage,
+                        sourceX, sourceY, frameWidth, frameHeight,
+                        destX, destY, frameWidth, frameHeight
+                    );
+
+                    frameIndex++;
+                }
+            }
+
+            // Enable download button
+            document.getElementById('downloadBtn').disabled = false;
+        }
+
+        function downloadSprite() {
+            const canvas = document.getElementById('convertedCanvas');
+            
+            canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = originalFilename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 'image/png');
+        }
+
+        // Auto-convert when values change
+        document.getElementById('columns').addEventListener('input', () => {
+            if (uploadedImage) convertSprite();
+        });
+
+        document.getElementById('rows').addEventListener('input', () => {
+            if (uploadedImage) convertSprite();
+        });
+    </script>
+</body>
+</html>
