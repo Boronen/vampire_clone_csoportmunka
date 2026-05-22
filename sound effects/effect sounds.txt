@@ -1,0 +1,22 @@
+magic smite - projectile 2
+168 - thunder hit (cropped)
+233 - thunder projectile (cropped)
+133 valamire 
+04_fire explosion - 11 fire
+112 - 12 nebula 
+246 - 13 vortex
+130 - 14 phantom
+18 - 16 sunburn
+258 - 17 felspell
+219 - 18 midnight
+shimmer - 19 freezing 
+Magic shield - 1 magicspell
+twink - 20 magicbubbles
+05_wind - 3 bluefire
+zap2a - 4 casting 
+warp2 - 5 magickahit
+091 - 7 firespin
+261 - 8 protectioncircle
+13_ice explosion - IceVFX 1 Repeatable
+
+tribe - grunts for character <3
