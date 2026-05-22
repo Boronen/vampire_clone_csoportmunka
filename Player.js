@@ -15,7 +15,7 @@ class Player extends Entity {
         // XP and Level system
         this.xp = 0;
         this.level = 1;
-        this.xpToNextLevel = 10;
+        this.xpToNextLevel = 50;
         this.projectileCount = 1; // Number of projectiles per shot
         this.projectileDamage = 20; // Base damage
         

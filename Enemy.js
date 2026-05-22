@@ -3,13 +3,13 @@
 // ============================================
 class Enemy extends Entity {
     constructor(x, y, player) {
-        super(x, y, 200, 200, 100, 30, 'Sprites/enemies/frogger_move.png', 8); // 8 frames for frog (4x scale)
-        this.player = player;
-        this.damage = 10;
-        this.scoreValue = 10;
-        this.velocityX = 0;
-        this.velocityY = 0;
-    }
+    super(x, y, 200, 200, 100, 30, 'Sprites/enemies/frogger_move.png', 14); // Changed from 8 to 14 frames
+    this.player = player;
+    this.damage = 10;
+    this.scoreValue = 10;
+    this.velocityX = 0;
+    this.velocityY = 0;
+}
 
     moveTowardsPlayer(deltaTime) {
         const dx = this.player.x - this.x;

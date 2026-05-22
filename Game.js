@@ -22,6 +22,8 @@ class Game {
         this.isPaused = false;
         this.upgradeMenuVisible = false;
         this.debugMode = false; // Debug hitbox visualization
+        this.fontImg = new Image();
+        this.fontImg.src = 'Sprites/fonts.png';
     }
 
     init() {
@@ -129,19 +131,53 @@ class Game {
         // Render UI
         this.renderUI();
     }
-
-    renderUI() {
-        this.ctx.fillStyle = 'white';
-        this.ctx.font = '24px Arial';
-        this.ctx.fillText(`Score: ${this.score}`, 20, 40);
-        this.ctx.fillText(`Level: ${this.player.level}`, 20, 70);
-        this.ctx.fillText(`XP: ${this.player.xp}/${this.player.xpToNextLevel}`, 20, 100);
-        this.ctx.fillText(`HP: ${Math.floor(this.player.health)}/${this.player.maxHealth}`, 20, 130);
+    renderCustomText(text, x, y, fontSize = 32) {
+    const letterWidth = 32;
+    const letterHeight = 32;
+    const scale = fontSize / 32;
+    
+    let currentX = x;
+    
+    for (let char of text.toUpperCase()) {
+        const charCode = char.charCodeAt(0);
+        let frameIndex = -1;
         
-        if (this.upgradeMenuVisible) {
-            this.renderUpgradeMenu();
+        // Map characters to spritesheet positions
+        if (charCode >= 65 && charCode <= 90) { // A-Z
+            frameIndex = charCode - 65; // 0-25
+        } else if (charCode >= 48 && charCode <= 57) { // 0-9
+            frameIndex = charCode - 48 + 26; // 26-35
+        } else if (charCode === 32) { // Space
+            currentX += letterWidth * scale;
+            continue;
+        } else if (charCode === 47) { // Slash /
+            frameIndex = 36; // Position 36 (37th character, 0-indexed)
         }
+        
+        if (frameIndex >= 0 && this.fontImg.complete) {
+            const sourceX = frameIndex * letterWidth;
+            const sourceY = 0;
+            
+            this.ctx.drawImage(
+                this.fontImg,
+                sourceX, sourceY, letterWidth, letterHeight,
+                currentX, y, letterWidth * scale, letterHeight * scale
+            );
+        }
+        
+        currentX += letterWidth * scale;
     }
+}
+    renderUI() {
+    this.renderCustomText(`Score: ${this.score}`, 20, 55 - 50, 24);
+    this.renderCustomText(`Level: ${this.player.level}`, 20, 85 - 50, 24);
+    this.renderCustomText(`XP: ${this.player.xp}/${this.player.xpToNextLevel}`, 20, 115 - 50, 24);
+    this.renderCustomText(`HP: ${Math.floor(this.player.health)}/${this.player.maxHealth}`, 20, 145 - 50, 24);
+    
+    if (this.upgradeMenuVisible) {
+        this.renderUpgradeMenu();
+    }
+}
 
     showUpgradeMenu() {
         this.isPaused = true;

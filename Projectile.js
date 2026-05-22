@@ -55,8 +55,6 @@ class Projectile {
             this.frameHeight = this.sprite.height;
         };
         this.sprite.src = path;
-        this.frameWidth = this.width;
-        this.frameHeight = this.height;
     }
 
     update(deltaTime) {
@@ -82,24 +80,49 @@ class Projectile {
     }
 
     render(ctx, cameraX, cameraY) {
-        if (this.spriteLoaded) {
-            // Draw the current frame from the spritesheet
+    if (this.spriteLoaded) {
+        ctx.save();
+        
+        // Flip projectile if moving left
+        if (this.velocityX < 0) {
+            ctx.translate(this.x - cameraX + this.width, this.y - cameraY);
+            ctx.scale(-1, 1);
             ctx.drawImage(
                 this.sprite,
-                this.currentFrame * this.frameWidth, // source X
-                0, // source Y
-                this.frameWidth, // source width
-                this.frameHeight, // source height
-                this.x - cameraX, // destination X
-                this.y - cameraY, // destination Y
-                this.width, // destination width
-                this.height // destination height
+                this.currentFrame * this.frameWidth,
+                0,
+                this.frameWidth,
+                this.frameHeight,
+                0,
+                0,
+                this.width,
+                this.height
             );
         } else {
-            ctx.fillStyle = 'yellow';
-            ctx.fillRect(this.x - cameraX, this.y - cameraY, this.width, this.height);
+            ctx.drawImage(
+                this.sprite,
+                this.currentFrame * this.frameWidth,
+                0,
+                this.frameWidth,
+                this.frameHeight,
+                this.x - cameraX,
+                this.y - cameraY,
+                this.width,
+                this.height
+            );
+        }
+        
+        ctx.restore();
+    } else {
+        // Draw explosion placeholder while sprite loads
+        const placeholderImg = new Image();
+        placeholderImg.src = 'Sprites/explo.png';
+        if (placeholderImg.complete) {
+            ctx.drawImage(placeholderImg, this.x - cameraX, this.y - cameraY, this.width, this.height);
         }
     }
+}
+/**/ 
 
     isActive() {
         return this.active;

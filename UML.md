@@ -2,7 +2,10 @@
 
 ## Class Overview
 
-This document describes the Object-Oriented architecture for a Vampire Survivors-like game using 6 classes.
+This document describes the Object-Oriented architecture for a Vampire Survivors-like game using 6 classes
+
+ez a játék egy shooter game ami egy fikcionális világban játszódik.
+nincs semmi története jelenleg, csak felülnézetból kell irányítani a player karaktert.
 
 ---
 
