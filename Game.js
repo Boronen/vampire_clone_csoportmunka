@@ -27,6 +27,20 @@ class Game {
         this.debugSpellMenuScroll = 0;
         this.fontImg = new Image();
         this.fontImg.src = 'Sprites/fonts.png';
+        
+        // Sound system
+        this.soundManager = new SoundManager();
+        
+        // Damage numbers
+        this.damageNumbers = new DamageNumberManager(this);
+        
+        // Game statistics
+        this.stats = {
+            enemiesKilled: 0,
+            damageDealt: 0,
+            startTime: 0,
+            endTime: 0
+        };
     }
 
     init() {
@@ -42,6 +56,11 @@ class Game {
         console.log('Game initialized!');
         this.setupUpgradeKeys();
         this.setupDebugKeys();
+        
+        // Reset stats
+        this.stats.startTime = Date.now();
+        this.stats.enemiesKilled = 0;
+        this.stats.damageDealt = 0;
     }
 
     start() {
@@ -52,12 +71,10 @@ class Game {
     }
 
     gameLoop(timestamp) {
-        if (!this.isRunning) return;
-
         const deltaTime = (timestamp - this.lastFrameTime) / 1000; // Convert to seconds
         this.lastFrameTime = timestamp;
 
-        if (!this.isPaused) {
+        if (this.isRunning && !this.isPaused) {
             this.update(deltaTime);
         }
         this.render();
@@ -79,9 +96,16 @@ class Game {
             if (!enemy.isAlive()) {
                 this.score += enemy.getScoreValue();
                 this.player.gainXP(enemy.getScoreValue());
+                this.stats.enemiesKilled++;
+                this.soundManager.playAttack(); // Play attack sound on kill
                 this.enemies.splice(i, 1);
             }
+
         }
+        
+        // Update damage numbers
+        this.damageNumbers.update(deltaTime);
+
 
         // Update projectiles
         for (let i = this.projectiles.length - 1; i >= 0; i--) {
@@ -125,6 +149,9 @@ class Game {
         for (const projectile of this.projectiles) {
             projectile.render(this.ctx, cameraX, cameraY);
         }
+        
+        // Render damage numbers (always on top)
+        this.damageNumbers.render(this.ctx, cameraX, cameraY);
 
         // Render debug hitboxes
         if (this.debugMode) {
@@ -343,6 +370,29 @@ class Game {
                 console.log(`Infinite HP: ${this.player.infiniteHP ? 'ON' : 'OFF'}`);
             }
             
+            // Scale ENEMY HP 2x with H key (debug)
+            if (e.key.toLowerCase() === 'h' && this.debugMode) {
+                // Double all existing enemies' HP
+                for (const enemy of this.enemies) {
+                    const oldMax = enemy.maxHealth;
+                    enemy.maxHealth = Math.floor(enemy.maxHealth * 2);
+                    const healthPercent = enemy.health / oldMax;
+                    enemy.health = Math.floor(enemy.maxHealth * healthPercent);
+                }
+                console.log(`All enemy HP doubled! (${this.enemies.length} enemies affected)`);
+            }
+            
+            // Instant death with K key (debug)
+            if (e.key.toLowerCase() === 'k' && this.debugMode) {
+                this.player.health = 0;
+                this.player.alive = false;
+                console.log('Instant death triggered!');
+                // Force game over check
+                if (!this.player.isAlive()) {
+                    this.gameOver();
+                }
+            }
+            
             // Open spell menu with P key (debug)
             if (e.key.toLowerCase() === 'p' && this.debugMode) {
                 this.showDebugSpellMenu();
@@ -477,10 +527,11 @@ class Game {
         this.ctx.fillStyle = 'white';
         this.ctx.font = '16px Arial';
         this.ctx.fillText('DEBUG MODE (U: toggle, L: level up, I: infinite HP, P: spell menu)', 20, 160);
+        this.ctx.fillText('H: 2x ENEMY HP, K: instant death', 20, 180);
         
         if (this.player.infiniteHP) {
             this.ctx.fillStyle = 'lime';
-            this.ctx.fillText('INFINITE HP: ON', 20, 180);
+            this.ctx.fillText('INFINITE HP: ON', 20, 200);
         }
         
         // Enemy scaling info
@@ -491,20 +542,20 @@ class Game {
         const enemyDamage = 10 + Math.floor(this.gameTime / 60) * 5;
         const nextScaleTime = Math.ceil(this.gameTime / 30) * 30 - this.gameTime;
         
-        this.ctx.fillText('=== ENEMY SCALING ===', 20, 200);
+        this.ctx.fillText('=== ENEMY SCALING ===', 20, 220);
         this.ctx.fillStyle = 'white';
-        this.ctx.fillText(`Game Time: ${Math.floor(this.gameTime)}s`, 20, 220);
-        this.ctx.fillText(`Enemy Base HP: ${baseEnemyHP} (x${timeMultiplier.toFixed(1)})`, 20, 240);
-        this.ctx.fillText(`Enemy Damage: ${enemyDamage}`, 20, 260);
-        this.ctx.fillText(`Next Scale: ${Math.ceil(nextScaleTime)}s`, 20, 280);
+        this.ctx.fillText(`Game Time: ${Math.floor(this.gameTime)}s`, 20, 240);
+        this.ctx.fillText(`Enemy Base HP: ${baseEnemyHP} (x${timeMultiplier.toFixed(1)})`, 20, 260);
+        this.ctx.fillText(`Enemy Damage: ${enemyDamage}`, 20, 280);
+        this.ctx.fillText(`Next Scale: ${Math.ceil(nextScaleTime)}s`, 20, 300);
         
         // Spell list
         this.ctx.fillStyle = 'cyan';
-        this.ctx.fillText('=== ACTIVE SPELLS ===', 20, 310);
+        this.ctx.fillText('=== ACTIVE SPELLS ===', 20, 330);
         const spells = this.player.spellManager.getAllSpells();
         this.ctx.fillStyle = 'white';
-        this.ctx.fillText(`Total: ${spells.length}`, 20, 330);
-        let y = 350;
+        this.ctx.fillText(`Total: ${spells.length}`, 20, 350);
+        let y = 370;
         for (const spell of spells) {
             this.ctx.fillText(`- ${spell.name} Lv${spell.level}`, 30, y);
             y += 20;
@@ -539,7 +590,9 @@ class Game {
                 const eBounds = enemy.getBounds();
 
                 if (this.checkRectCollision(pBounds, eBounds)) {
-                    enemy.takeDamage(projectile.getDamage());
+                    const damage = projectile.getDamage();
+                    enemy.takeDamage(damage);
+                    this.stats.damageDealt += damage;
                     projectile.deactivate();
                     break;
                 }
@@ -588,16 +641,70 @@ class Game {
 
     gameOver() {
         this.isRunning = false;
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        this.stats.endTime = Date.now();
+        this.soundManager.playDeath();
+        
+        // Render death screen
+        this.renderDeathScreen();
+    }
+    
+    renderDeathScreen() {
+        const centerX = this.canvas.width / 2;
+        const centerY = this.canvas.height / 2;
+        
+        // Calculate stats
+        const survivalTime = Math.floor((this.stats.endTime - this.stats.startTime) / 1000);
+        const minutes = Math.floor(survivalTime / 60);
+        const seconds = survivalTime % 60;
+        const timeStr = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        
+        // Dark overlay
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
-        this.ctx.fillStyle = 'white';
-        this.ctx.font = '48px Arial';
+        // Title
+        this.ctx.fillStyle = '#ff4444';
+        this.ctx.font = 'bold 72px Arial';
         this.ctx.textAlign = 'center';
-        this.ctx.fillText('GAME OVER', this.canvas.width / 2, this.canvas.height / 2);
-        this.ctx.font = '32px Arial';
-        this.ctx.fillText(`Final Score: ${this.score}`, this.canvas.width / 2, this.canvas.height / 2 + 50);
+        this.ctx.fillText('GAME OVER', centerX, centerY - 150);
+        
+        // Stats box
+        this.ctx.fillStyle = 'rgba(50, 50, 50, 0.8)';
+        this.ctx.fillRect(centerX - 250, centerY - 80, 500, 220);
+        
+        // Stats
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = '28px Arial';
+        this.ctx.fillText('== STATISTICS ==', centerX, centerY - 40);
+        
         this.ctx.font = '24px Arial';
-        this.ctx.fillText('Refresh to play again', this.canvas.width / 2, this.canvas.height / 2 + 100);
+        this.ctx.fillStyle = '#00ff00';
+        this.ctx.fillText(`⏱ Survival Time: ${timeStr}`, centerX, centerY);
+        
+        this.ctx.fillStyle = '#ff9900';
+        this.ctx.fillText(`💀 Enemies Killed: ${this.stats.enemiesKilled}`, centerX, centerY + 35);
+        
+        this.ctx.fillStyle = '#ff3333';
+        this.ctx.fillText(`⚔ Total Damage: ${Math.floor(this.stats.damageDealt)}`, centerX, centerY + 70);
+        
+        this.ctx.fillStyle = '#ffff00';
+        this.ctx.fillText(`⭐ Final Level: ${this.player.level}`, centerX, centerY + 105);
+        
+        // Restart instructions
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = '20px Arial';
+        this.ctx.fillText('Press R to Restart', centerX, centerY + 170);
+        
+        this.ctx.textAlign = 'left';
+        
+        // Setup restart listener
+        if (!this.restartListener) {
+            this.restartListener = (e) => {
+                if (e.key.toLowerCase() === 'r' && !this.isRunning) {
+                    location.reload();
+                }
+            };
+            window.addEventListener('keydown', this.restartListener);
+        }
     }
 }

@@ -10,6 +10,7 @@ class Enemy extends Entity {
         
         super(x, y, 200, 200, scaledHP, 30, 'Sprites/enemies/frogger_move.png', 14);
         this.player = player;
+        this.game = game;
         this.damage = 10 + Math.floor(game.gameTime / 60) * 5; // +5 damage every minute
         this.scoreValue = 10;
         this.velocityX = 0;

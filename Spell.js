@@ -79,6 +79,12 @@ class Spell {
         if (!this.canCast(currentTime)) return false;
         
         this.lastCastTime = currentTime;
+        
+        // Play spell sound
+        if (this.player && this.player.game && this.player.game.soundManager) {
+            this.player.game.soundManager.playSpellSound(this.id);
+        }
+        
         this.onCast();
         return true;
     }

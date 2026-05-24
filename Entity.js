@@ -94,6 +94,18 @@ class Entity {
     takeDamage(amount) {
         this.health -= amount;
         if (this.health < 0) this.health = 0;
+        
+        // Show damage number if game exists
+        if (this.game && this.game.damageNumbers) {
+            const x = this.x + this.width / 2;
+            const y = this.y + this.height / 4;
+            this.game.damageNumbers.addDamage(x, y, amount, false);
+        }
+        
+        // Play damage sound for player
+        if (this.game && this.game.soundManager && this === this.game.player) {
+            this.game.soundManager.playDamage();
+        }
     }
 
     isAlive() {

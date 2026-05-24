@@ -20,6 +20,11 @@ class Player extends Entity {
         this.projectileDamage = 20; // Base damage
         this.infiniteHP = false; // Debug mode infinite HP
         
+        // Invincibility frames
+        this.invincible = false;
+        this.invincibilityDuration = 1.0; // 1 second invincibility
+        this.invincibilityTimer = 0;
+        
         // Spell system
         this.spellManager = new SpellManager(this);
         
@@ -211,6 +216,11 @@ class Player extends Entity {
             return;
         }
         
+        // Invincibility frames prevent damage
+        if (this.invincible) {
+            return;
+        }
+        
         // Check for active shields
         const shields = this.spellManager.getActiveShields();
         for (const shield of shields) {
@@ -220,12 +230,25 @@ class Player extends Entity {
         
         // Apply remaining damage
         super.takeDamage(amount);
+        
+        // Activate invincibility frames after taking damage
+        this.invincible = true;
+        this.invincibilityTimer = this.invincibilityDuration;
     }
 
     update(deltaTime) {
         this.handleInput();
         this.move(deltaTime);
         this.shoot(Date.now());
+        
+        // Update invincibility timer
+        if (this.invincible) {
+            this.invincibilityTimer -= deltaTime;
+            if (this.invincibilityTimer <= 0) {
+                this.invincible = false;
+                this.invincibilityTimer = 0;
+            }
+        }
         
         // Update spell system
         this.spellManager.update(deltaTime);
@@ -254,8 +277,20 @@ class Player extends Entity {
     }
     
     render(ctx, cameraX, cameraY) {
+        // Apply flashing effect during invincibility
+        if (this.invincible) {
+            // Flash every 100ms
+            const flashCycle = Math.floor(this.invincibilityTimer * 10) % 2;
+            if (flashCycle === 1) {
+                ctx.globalAlpha = 0.4; // Semi-transparent when flashing
+            }
+        }
+        
         // Render player sprite
         super.render(ctx, cameraX, cameraY);
+        
+        // Reset alpha
+        ctx.globalAlpha = 1.0;
         
         // Render spell effects
         this.spellManager.render(ctx, cameraX, cameraY);

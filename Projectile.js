@@ -114,12 +114,9 @@ class Projectile {
         
         ctx.restore();
     } else {
-        // Draw explosion placeholder while sprite loads
-        const placeholderImg = new Image();
-        placeholderImg.src = 'Sprites/explo.png';
-        if (placeholderImg.complete) {
-            ctx.drawImage(placeholderImg, this.x - cameraX, this.y - cameraY, this.width, this.height);
-        }
+        // Draw simple placeholder while sprite loads
+        ctx.fillStyle = 'yellow';
+        ctx.fillRect(this.x - cameraX, this.y - cameraY, this.width, this.height);
     }
 }
 /**/ 

@@ -191,13 +191,18 @@ class SpellManager {
     }
     
     castDash() {
-        if (!this.dashSpell) return false;
+        if (!this.dashSpell) {
+            console.log('No dash spell equipped!');
+            return false;
+        }
         
         const currentTime = Date.now();
         if (this.dashSpell.canCast(currentTime)) {
             this.dashSpell.cast(currentTime);
+            console.log('Dash cast!');
             return true;
         }
+        console.log('Dash on cooldown!');
         return false;
     }
     
