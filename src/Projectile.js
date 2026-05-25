@@ -22,14 +22,14 @@ class Projectile {
             this.speed = 400;
             this.damage = baseDamage;
             this.frameCount = 5; // Thunder has 5 frames
-            this.loadSprite('Sprites/Thunder Projectile 1/Thunder projectile1 wo blur.png');
+            this.loadSprite('assets/Sprites/Thunder Projectile 1/Thunder projectile1 wo blur.png');
         } else if (type === 'magic') {
             this.width = 64;
             this.height = 64;
             this.speed = 350;
             this.damage = baseDamage;
             this.frameCount = 16; // Projectile 2 has 16 frames
-            this.loadSprite('Sprites/Projectile 2/Projectile 2 wo blur.png');
+            this.loadSprite('assets/Sprites/Projectile 2/Projectile 2 wo blur.png');
         }
 
         // Calculate direction

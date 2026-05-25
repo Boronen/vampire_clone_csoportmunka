@@ -26,7 +26,7 @@ class Game {
         this.debugSpellMenuVisible = false;
         this.debugSpellMenuScroll = 0;
         this.fontImg = new Image();
-        this.fontImg.src = 'Sprites/fonts.png';
+        this.fontImg.src = 'assets/Sprites/fonts.png';
         
         // Sound system
         this.soundManager = new SoundManager();
@@ -45,7 +45,7 @@ class Game {
 
     init() {
         // Initialize game objects
-        this.background = new Background('Sprites/background.jpg');
+        this.background = new Background('assets/Sprites/background.jpg');
         this.player = new Player(100, 100, this);
         
         // Spawn initial enemies

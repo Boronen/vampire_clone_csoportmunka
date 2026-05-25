@@ -3,7 +3,7 @@
 // ============================================
 class Player extends Entity {
     constructor(x, y, game) {
-        super(x, y, 256, 256, 250, 100, 'Sprites/Idle.png', 8); // 8 frames for idle (4x scale)
+        super(x, y, 256, 256, 250, 100, 'assets/Sprites/Idle.png', 8); // 8 frames for idle (4x scale)
         this.game = game;
         this.keys = {};
         this.weapons = ['thunder']; // Start with thunder weapon (legacy)
@@ -36,13 +36,13 @@ class Player extends Entity {
         };
         
         this.animations.idle.sprite.onload = () => this.animations.idle.loaded = true;
-        this.animations.idle.sprite.src = 'Sprites/Idle.png';
+        this.animations.idle.sprite.src = 'assets/Sprites/Idle.png';
         
         this.animations.run.sprite.onload = () => this.animations.run.loaded = true;
-        this.animations.run.sprite.src = 'Sprites/Run.png';
+        this.animations.run.sprite.src = 'assets/Sprites/Run.png';
         
         this.animations.attack1.sprite.onload = () => this.animations.attack1.loaded = true;
-        this.animations.attack1.sprite.src = 'Sprites/Attack1.png';
+        this.animations.attack1.sprite.src = 'assets/Sprites/Attack1.png';
         
         this.currentAnimation = 'idle';
         

@@ -8,7 +8,7 @@ class Enemy extends Entity {
         const timeMultiplier = 1 + Math.floor(game.gameTime / 30) * 0.2;
         const scaledHP = Math.floor(100 * timeMultiplier);
         
-        super(x, y, 200, 200, scaledHP, 30, 'Sprites/enemies/frogger_move.png', 14);
+        super(x, y, 200, 200, scaledHP, 30, 'assets/Sprites/enemies/frogger_move.png', 14);
         this.player = player;
         this.game = game;
         this.damage = 10 + Math.floor(game.gameTime / 60) * 5; // +5 damage every minute

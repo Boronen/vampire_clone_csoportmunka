@@ -17,30 +17,30 @@ function loadScript(src) {
 async function loadGameScripts() {
     try {
         // Load core dependencies first
-        await loadScript('Background.js');
-        await loadScript('Entity.js');
-        await loadScript('Projectile.js');
+        await loadScript('src/Background.js');
+        await loadScript('src/Entity.js');
+        await loadScript('src/Projectile.js');
         
         // Load spell system
-        await loadScript('Spell.js');
-        await loadScript('SpellTypes/ProjectileSpell.js');
-        await loadScript('SpellTypes/OrbitalSpell.js');
-        await loadScript('SpellTypes/AOESpell.js');
-        await loadScript('SpellTypes/StaticAOESpell.js');
-        await loadScript('SpellTypes/SkyFallSpell.js');
-        await loadScript('SpellTypes/ShieldSpell.js');
-        await loadScript('SpellTypes/MeleeSpell.js');
-        await loadScript('SpellData.js');
-        await loadScript('SpellManager.js');
+        await loadScript('src/Spell.js');
+        await loadScript('src/ProjectileSpell.js');
+        await loadScript('src/OrbitalSpell.js');
+        await loadScript('src/AOESpell.js');
+        await loadScript('src/StaticAOESpell.js');
+        await loadScript('src/SkyFallSpell.js');
+        await loadScript('src/ShieldSpell.js');
+        await loadScript('src/MeleeSpell.js');
+        await loadScript('src/SpellData.js');
+        await loadScript('src/SpellManager.js');
         
         // Load managers
-        await loadScript('SoundManager.js');
-        await loadScript('DamageNumber.js');
+        await loadScript('src/SoundManager.js');
+        await loadScript('src/DamageNumber.js');
         
         // Load game classes
-        await loadScript('Player.js');
-        await loadScript('Enemy.js');
-        await loadScript('Game.js');
+        await loadScript('src/Player.js');
+        await loadScript('src/Enemy.js');
+        await loadScript('src/Game.js');
         
         console.log('All game scripts loaded successfully!');
         return true;
