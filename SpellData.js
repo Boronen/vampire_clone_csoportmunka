@@ -809,3 +809,6 @@ const SPELL_DATA = {
         knockbackForce: 300
     }
 };
+
+// Expose SPELL_DATA to window for testing
+window.SPELL_DATA = SPELL_DATA;

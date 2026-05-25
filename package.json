@@ -1,0 +1,27 @@
+{
+  "name": "vampire_clone_csoportmunka",
+  "version": "1.0.0",
+  "description": "> Ez a projekt egy **Vampire Survivors** stílusú játék, ahol a játékos egy karaktert irányít, aki automatikusan támadja a közelében lévő ellenségeket. A cél a minél hosszabb ideig való túlélés, miközben különböző varázslatok és képességek feloldásával egyre erősebbé válunk. A játék során gyűjtött tapasztalati pontokért szintléphetünk, és új fegyvereket, varázslatokat szerezhetünk.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "serve": "npx http-server -p 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Boronen/vampire_clone_csoportmunka.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Boronen/vampire_clone_csoportmunka/issues"
+  },
+  "homepage": "https://github.com/Boronen/vampire_clone_csoportmunka#readme",
+  "devDependencies": {
+    "cypress": "^15.15.0"
+  }
+}
