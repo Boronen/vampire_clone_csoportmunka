@@ -811,4 +811,6 @@ const SPELL_DATA = {
 };
 
 // Expose SPELL_DATA to window for testing
-window.SPELL_DATA = SPELL_DATA;
+if (typeof window !== 'undefined') {
+    window.SPELL_DATA = SPELL_DATA;
+}

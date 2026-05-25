@@ -4,48 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vampire Survivors Clone</title>
-    
-    <style>
-        html, body {
-        overflow: hidden; /* Removes scrollbar entirely */
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #000;
-            font-family: Arial, sans-serif;
-            flex-direction: column;
-        }
-
-        #gameCanvas {
-            border: 3px solid #444;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            background-color: #1a1a1a;
-        }
-
-        .controls {
-            color: white;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .controls h3 {
-            margin-bottom: 10px;
-        }
-
-        .controls p {
-            margin: 5px 0;
-            color: #ccc;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="index.js"></script>
 </head>
 <body>
     <canvas id="gameCanvas"></canvas>
@@ -59,32 +19,5 @@
         <p><strong>Debug:</strong> U (toggle), L (instant level up)</p>
         <p><strong>Objective:</strong> Survive and collect spells!</p>
     </div>
-
-    <!-- Load scripts in correct order -->
-    <script src="Background.js"></script>
-    <script src="Entity.js"></script>
-    <script src="Projectile.js"></script>
-    
-    <!-- Spell System -->
-    <script src="Spell.js"></script>
-    <script src="SpellTypes/ProjectileSpell.js"></script>
-    <script src="SpellTypes/OrbitalSpell.js"></script>
-    <script src="SpellTypes/AOESpell.js"></script>
-    <script src="SpellTypes/StaticAOESpell.js"></script>
-    <script src="SpellTypes/SkyFallSpell.js"></script>
-    <script src="SpellTypes/ShieldSpell.js"></script>
-    <script src="SpellTypes/MeleeSpell.js"></script>
-    <script src="SpellData.js"></script>
-    <script src="SpellManager.js"></script>
-    
-    <!-- Sound & Effects -->
-    <script src="SoundManager.js"></script>
-    <script src="DamageNumber.js"></script>
-    
-    <!-- Game Classes -->
-    <script src="Player.js"></script>
-    <script src="Enemy.js"></script>
-    <script src="Game.js"></script>
-    <script src="index.js"></script>
 </body>
 </html>

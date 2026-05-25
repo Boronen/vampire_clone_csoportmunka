@@ -7,6 +7,11 @@ describe('Vampire Survivors Clone - Game Tests', () => {
   beforeEach(() => {
     // Visit the game before each test
     cy.visit('/')
+    
+    // Wait for game to be fully loaded (scripts loaded dynamically)
+    cy.window().should('have.property', 'game')
+    cy.window().its('game').should('not.be.null')
+    cy.wait(500) // Additional wait for initialization
   })
 
   // ============================================

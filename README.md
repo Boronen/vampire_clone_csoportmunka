@@ -188,8 +188,8 @@ A projekt feladatok kezelése a [PROJEKTMENEDZSMENT.md](./PROJEKTMENEDZSMENT.md)
 
 - **HTML5 Canvas API** - Játék renderelés
 - **Vanilla JavaScript (ES6+)** - Játék logika
-- **CSS3** - UI styling
-- **ES6 Modules** - Kód szervezés
+- **CSS3** - Külső stylesheet (style.css)
+- **ES6 Modules** - Modern module rendszer, dinamikus script betöltés
 - **Cypress** - E2E tesztelés
 - **Draw.io** - UML diagramok
 - **Git & GitHub** - Verziókezelés
@@ -198,8 +198,9 @@ A projekt feladatok kezelése a [PROJEKTMENEDZSMENT.md](./PROJEKTMENEDZSMENT.md)
 
 ```
 vampire_clone_csoportmunka/
-├── index.html              # Főoldal
-├── index.js                # Belépési pont
+├── index.html              # Főoldal (csak index.js betöltése)
+├── style.css               # Külső CSS fájl (ÚJ!)
+├── index.js                # Belépési pont (dinamikus script betöltés)
 ├── README.md               # Ez a fájl
 ├── UML.md                  # UML diagramok
 ├── SPECIFIKACIO.md         # Részletes specifikáció
@@ -238,10 +239,16 @@ vampire_clone_csoportmunka/
 │
 ├── sound effects/          # Hangeffektek
 │
-└── cypress/                # Tesztek (készülőben)
+└── cypress/                # E2E tesztek
     ├── e2e/
     └── support/
 ```
+
+### 🎯 Új architektúra jellemzői:
+- ✅ **Clean HTML**: Csak `style.css` és `index.js` betöltése
+- ✅ **Szeparált CSS**: Minden stílus külön fájlban
+- ✅ **Modern ES6**: Module pattern, dinamikus importok
+- ✅ **Egyszerű entry point**: Egy fájl kezeli az egész betöltést
 
 ## 🎮 Játékmenet
 

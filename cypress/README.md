@@ -24,6 +24,10 @@ python -m http.server 8080
 npm run serve
 ```
 
+### ⚠️ Fontos változás (2026.05.26)
+A projekt mostantól **dinamikus script betöltést** használ. Az `index.js` tölt be minden függőséget.
+A tesztek automatikusan várnak a scriptek betöltésére a `beforeEach()` hookban.
+
 ### 3. Cypress futtatása
 
 **Interaktív mód (GUI):**

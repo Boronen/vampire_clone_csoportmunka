@@ -1,5 +1,100 @@
 # Changelog - Vampire Survivors Clone
 
+## [1.1.0] - 2026.05.26 (Later)
+
+### 🏗️ Architektúra modernizálás
+
+**Modern ES6 module structure implementálása**
+
+#### ✨ Változások:
+
+1. **HTML Tisztítás**
+   - ❌ Eltávolítva: 25+ script tag a HTML-ből
+   - ✅ HTML mostantól CSAK `style.css` és `index.js` betöltése
+   - ✅ Clean, minimal HTML struktúra
+
+2. **CSS Szeparáció**
+   - ❌ Inline styles eltávolítva az index.html-ből
+   - ✅ Új `style.css` fájl létrehozva
+   - ✅ Minden stílus egy helyen
+
+3. **Dinamikus Script Betöltés**
+   - ✅ `index.js` dinamikusan tölti be az összes függőséget
+   - ✅ Promise-based loading biztosítja a helyes sorrendet
+   - ✅ Egyetlen entry point a teljes alkalmazáshoz
+
+4. **ES6 Module Exports**
+   - ✅ Minden core class export statement-tel ellátva
+   - ✅ Készen áll a teljes ES6 module konverzióra
+   - ✅ Backward compatible (window objektum exposure)
+
+5. **Cypress Test Frissítés**
+   - ✅ `beforeEach()` vár a script betöltésre
+   - ✅ 500ms extra wait biztosítja az inicializációt
+   - ✅ Összes teszt működik az új struktúrával
+
+6. **Dokumentáció Frissítés**
+   - ✅ README.md: Új architektúra leírás
+   - ✅ cypress/README.md: Dinamikus loading dokumentálás
+   - ✅ CHANGELOG.md: Ez a bejegyzés
+
+#### 📊 Előtte/Utána:
+
+**Előtte (index.html):**
+```html
+<head>
+  <title>...</title>
+  <style>/* 50+ line inline CSS */</style>
+  <script src="Background.js"></script>
+  <script src="Entity.js"></script>
+  <script src="Projectile.js"></script>
+  <!-- + 20 további script tag -->
+</head>
+```
+
+**Utána (index.html):**
+```html
+<head>
+  <title>...</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="index.js"></script>
+</head>
+```
+
+#### 🎯 Előnyök:
+
+- ✅ **Tiszta kód**: HTML minimal és olvasható
+- ✅ **Jobb szervezés**: CSS külön fájlban
+- ✅ **Modern pattern**: ES6 module loading
+- ✅ **Karbantarthatóság**: Egyszerűbb dependency management
+- ✅ **Best practices**: Követi az iparági szabványokat
+- ✅ **Kompatibilitás**: Cypress tesztek továbbra is működnek
+
+#### 🔧 Technikai részletek:
+
+**index.js dinamikus loading:**
+```javascript
+async function loadGameScripts() {
+  await loadScript('Background.js');
+  await loadScript('Entity.js');
+  // ... stb
+  window.game = new Game();
+  window.game.init();
+  window.game.start();
+}
+```
+
+**Cypress test timing fix:**
+```javascript
+beforeEach(() => {
+  cy.visit('/');
+  cy.window().should('have.property', 'game');
+  cy.wait(500); // Wait for initialization
+})
+```
+
+---
+
 ## [1.0.0] - 2026.05.26
 
 ### 🎉 Projekt átstrukturálás és dokumentáció
