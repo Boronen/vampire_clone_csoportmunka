@@ -1,7 +1,21 @@
 // ============================================
 // Projectile Class - Player weapons/spells
 // ============================================
+
+/**
+ * @class Projectile
+ * @classdesc Lövedék osztály a játékos alap támadásához. Különböző típusú lövedékeket támogat (thunder, magic).
+ */
 class Projectile {
+    /**
+     * Létrehoz egy új Projectile példányt.
+     * @param {number} x - A lövedék kezdő X koordinátája.
+     * @param {number} y - A lövedék kezdő Y koordinátája.
+     * @param {number} targetX - A célpont X koordinátája.
+     * @param {number} targetY - A célpont Y koordinátája.
+     * @param {string} type - A lövedék típusa ('thunder' vagy 'magic').
+     * @param {number} [baseDamage=20] - A lövedék alapértelmezett sebzése.
+     */
     constructor(x, y, targetX, targetY, type, baseDamage = 20) {
         this.x = x;
         this.y = y;
@@ -46,6 +60,10 @@ class Projectile {
         }
     }
 
+    /**
+     * Betölti a lövedék sprite képét.
+     * @param {string} path - A sprite kép fájl elérési útja.
+     */
     loadSprite(path) {
         this.sprite = new Image();
         this.spriteLoaded = false;
@@ -57,6 +75,10 @@ class Projectile {
         this.sprite.src = path;
     }
 
+    /**
+     * Frissíti a lövedék pozícióját és animációját.
+     * @param {number} deltaTime - Az előző képkocka óta eltelt idő másodpercben.
+     */
     update(deltaTime) {
         const moveX = this.velocityX * deltaTime;
         const moveY = this.velocityY * deltaTime;
@@ -79,6 +101,12 @@ class Projectile {
         }
     }
 
+    /**
+     * Megjeleníti a lövedéket a canvason.
+     * @param {CanvasRenderingContext2D} ctx - A canvas 2D kontextusa.
+     * @param {number} cameraX - A kamera X pozíciója.
+     * @param {number} cameraY - A kamera Y pozíciója.
+     */
     render(ctx, cameraX, cameraY) {
     if (this.spriteLoaded) {
         ctx.save();

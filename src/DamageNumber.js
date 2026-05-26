@@ -1,7 +1,19 @@
 // ============================================
 // DamageNumber Class - Floating damage numbers
 // ============================================
+
+/**
+ * @class DamageNumber
+ * @classdesc Lebegő sebzésszám osztály, amely vizuálisan megjeleníti a sebzést.
+ */
 class DamageNumber {
+    /**
+     * Létrehoz egy új DamageNumber példányt.
+     * @param {number} x - A kezdő X koordináta.
+     * @param {number} y - A kezdő Y koordináta.
+     * @param {number} damage - A megjelenítendő sebzés mennyisége.
+     * @param {boolean} [isCrit=false] - Kritikus sebzés-e.
+     */
     constructor(x, y, damage, isCrit = false) {
         this.x = x;
         this.y = y;
@@ -13,6 +25,11 @@ class DamageNumber {
         this.alpha = 1.0;
     }
     
+    /**
+     * Frissíti a sebzésszám állapotát (mozgatás, halványítás).
+     * @param {number} deltaTime - Az előző képkocka óta eltelt idő másodpercben.
+     * @returns {boolean} True, ha a sebzésszám még életben van.
+     */
     update(deltaTime) {
         this.elapsed += deltaTime;
         this.y += this.velocityY * deltaTime;
@@ -23,6 +40,13 @@ class DamageNumber {
         return this.elapsed < this.life;
     }
     
+    /**
+     * Megjeleníti a sebzésszámot a canvason.
+     * @param {CanvasRenderingContext2D} ctx - A canvas 2D kontextusa.
+     * @param {number} cameraX - A kamera X pozíciója.
+     * @param {number} cameraY - A kamera Y pozíciója.
+     * @param {HTMLImageElement} fontImg - A betűtípus sprite kép.
+     */
     render(ctx, cameraX, cameraY, fontImg) {
         if (!fontImg || !fontImg.complete) return;
         
@@ -82,16 +106,37 @@ class DamageNumber {
 // ============================================
 // DamageNumberManager - Manages all damage numbers
 // ============================================
+
+/**
+ * @class DamageNumberManager
+ * @classdesc Kezeli az összes sebzésszámot a játékban.
+ */
 class DamageNumberManager {
+    /**
+     * Létrehoz egy új DamageNumberManager példányt.
+     * @param {Game} game - A fő játék objektum referenciája.
+     */
     constructor(game) {
         this.game = game;
+        /** @type {Array<DamageNumber>} */
         this.numbers = [];
     }
     
+    /**
+     * Hozzáad egy új sebzésszámot.
+     * @param {number} x - Az X koordináta.
+     * @param {number} y - Az Y koordináta.
+     * @param {number} damage - A sebzés mennyisége.
+     * @param {boolean} [isCrit=false] - Kritikus sebzés-e.
+     */
     addDamage(x, y, damage, isCrit = false) {
         this.numbers.push(new DamageNumber(x, y, damage, isCrit));
     }
     
+    /**
+     * Frissíti az összes sebzésszámot.
+     * @param {number} deltaTime - Az előző képkocka óta eltelt idő másodpercben.
+     */
     update(deltaTime) {
         for (let i = this.numbers.length - 1; i >= 0; i--) {
             if (!this.numbers[i].update(deltaTime)) {
@@ -100,6 +145,12 @@ class DamageNumberManager {
         }
     }
     
+    /**
+     * Megjeleníti az összes sebzésszámot.
+     * @param {CanvasRenderingContext2D} ctx - A canvas 2D kontextusa.
+     * @param {number} cameraX - A kamera X pozíciója.
+     * @param {number} cameraY - A kamera Y pozíciója.
+     */
     render(ctx, cameraX, cameraY) {
         for (const number of this.numbers) {
             number.render(ctx, cameraX, cameraY, this.game.fontImg);

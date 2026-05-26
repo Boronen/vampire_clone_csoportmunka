@@ -1,7 +1,21 @@
 // ============================================
 // Enemy Class - Enemies that chase the player
 // ============================================
+
+/**
+ * @class Enemy
+ * @extends Entity
+ * @classdesc Ellenfél osztály, amely üldözi a játékost. Az ellenségek sebzése és életpontja 
+ * az idő múlásával növekszik (scaling).
+ */
 class Enemy extends Entity {
+    /**
+     * Létrehoz egy új Enemy példányt.
+     * Az életpont és sebzés az eltelt játékidő alapján skálázódik.
+     * @param {number} x - Az ellenfél kezdő X koordinátája.
+     * @param {number} y - Az ellenfél kezdő Y koordinátája.
+     * @param {Player} player - A játékos referencia, akit üldözni fog.
+     */
     constructor(x, y, player) {
         // Scale HP based on game time (every 30 seconds, +20% HP)
         const game = player.game;
@@ -18,6 +32,10 @@ class Enemy extends Entity {
         this.baseMaxHealth = scaledHP;
     }
 
+    /**
+     * Mozgatja az ellenséget a játékos irányába.
+     * @param {number} deltaTime - Az előző képkocka óta eltelt idő másodpercben.
+     */
     moveTowardsPlayer(deltaTime) {
         const dx = this.player.x - this.x;
         const dy = this.player.y - this.y;
@@ -39,14 +57,26 @@ class Enemy extends Entity {
         }
     }
 
+    /**
+     * Visszaadja az ellenfél pontértékét (XP).
+     * @returns {number} A pontérték.
+     */
     getScoreValue() {
         return this.scoreValue;
     }
 
+    /**
+     * Visszaadja az ellenfél sebzését.
+     * @returns {number} A sebzés mennyisége.
+     */
     getDamage() {
         return this.damage;
     }
 
+    /**
+     * Frissíti az ellenfél állapotát.
+     * @param {number} deltaTime - Az előző képkocka óta eltelt idő másodpercben.
+     */
     update(deltaTime) {
         this.moveTowardsPlayer(deltaTime);
         super.update(deltaTime); // Update animation

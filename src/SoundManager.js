@@ -1,17 +1,34 @@
 // ============================================
 // SoundManager Class - Handles all game audio
 // ============================================
+
+/**
+ * @class SoundManager
+ * @classdesc Hangkezelő osztály, amely betölti és lejátssza a játék összes hangeffektjét.
+ */
 class SoundManager {
+    /**
+     * Létrehoz egy új SoundManager példányt és betölti a hangokat.
+     */
     constructor() {
+        /** @type {Object<string, HTMLAudioElement>} */
         this.sounds = {};
+        /** @type {boolean} */
         this.enabled = true;
+        /** @type {number} */
         this.volume = 0.3; // Default volume
+        /** @type {number} */
         this.lastSpellSound = 0;
+        /** @type {number} */
         this.spellSoundCooldown = 0.1; // Only play spell sounds every 100ms
         
         this.loadSounds();
     }
     
+    /**
+     * Betölti az összes játék hangeffektet.
+     * @private
+     */
     loadSounds() {
         // Character sounds
         this.sounds.attack = new Audio('assets/sound effects/tribe_h.wav');
@@ -47,11 +64,17 @@ class SoundManager {
         });
     }
     
+    /**
+     * Lejátssza a támadás hangot.
+     */
     playAttack() {
         if (!this.enabled) return;
         this.play('attack');
     }
     
+    /**
+     * Lejátssza a sebzés hangot (véletlenszerűen választ két közül).
+     */
     playDamage() {
         if (!this.enabled) return;
         // Randomly choose between two damage sounds
@@ -59,11 +82,18 @@ class SoundManager {
         this.play(sound);
     }
     
+    /**
+     * Lejátssza a halál hangot.
+     */
     playDeath() {
         if (!this.enabled) return;
         this.play('death');
     }
     
+    /**
+     * Lejátssza az adott varázslat hangját.
+     * @param {string} spellId - A varázslat azonosítója.
+     */
     playSpellSound(spellId) {
         if (!this.enabled) return;
         
@@ -81,6 +111,11 @@ class SoundManager {
         }
     }
     
+    /**
+     * Lejátssza a megadott hangot.
+     * @param {string} soundName - A hang neve.
+     * @private
+     */
     play(soundName) {
         const sound = this.sounds[soundName];
         if (sound) {
@@ -91,6 +126,10 @@ class SoundManager {
         }
     }
     
+    /**
+     * Beállítja a hangerőt.
+     * @param {number} volume - A hangerő 0 és 1 között.
+     */
     setVolume(volume) {
         this.volume = Math.max(0, Math.min(1, volume));
         Object.values(this.sounds).forEach(sound => {
@@ -98,6 +137,10 @@ class SoundManager {
         });
     }
     
+    /**
+     * Ki/bekapcsolja a hangokat.
+     * @returns {boolean} Az új állapot (be van-e kapcsolva).
+     */
     toggle() {
         this.enabled = !this.enabled;
         return this.enabled;

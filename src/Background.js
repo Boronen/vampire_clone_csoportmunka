@@ -1,7 +1,17 @@
 // ============================================
 // Background Class - Infinite scrolling background
 // ============================================
+
+/**
+ * @class Background
+ * @classdesc Végtelen ismétlődő háttér osztály. A háttérképet csempézi, 
+ * hogy folyamatosan kitöltse a látható területet a kamera mozgása közben.
+ */
 class Background {
+    /**
+     * Létrehoz egy új Background példányt.
+     * @param {string} imagePath - A háttérkép fájl elérési útja.
+     */
     constructor(imagePath) {
         this.image = new Image();
         this.imageLoaded = false;
@@ -15,6 +25,14 @@ class Background {
         this.height = 600;
     }
 
+    /**
+     * Megjeleníti a hátteret csempézve a látható területen.
+     * @param {CanvasRenderingContext2D} ctx - A canvas 2D kontextusa.
+     * @param {number} cameraX - A kamera X pozíciója.
+     * @param {number} cameraY - A kamera Y pozíciója.
+     * @param {number} canvasWidth - A canvas szélessége.
+     * @param {number} canvasHeight - A canvas magassága.
+     */
     render(ctx, cameraX, cameraY, canvasWidth, canvasHeight) {
     if (!this.imageLoaded) return;
 
@@ -34,6 +52,10 @@ class Background {
     }
 }
 
+    /**
+     * Ellenőrzi, hogy a háttérkép betöltődött-e.
+     * @returns {boolean} True, ha a kép betöltődött.
+     */
     isLoaded() {
         return this.imageLoaded;
     }

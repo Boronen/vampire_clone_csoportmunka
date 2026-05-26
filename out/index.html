@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Background.html">Background</a><ul class='methods'><li data-type='method'><a href="Background.html#isLoaded">isLoaded</a></li><li data-type='method'><a href="Background.html#render">render</a></li></ul></li><li></li><li><a href="DamageNumber.html">DamageNumber</a><ul class='methods'><li data-type='method'><a href="DamageNumber.html#render">render</a></li><li data-type='method'><a href="DamageNumber.html#update">update</a></li></ul></li><li></li><li><a href="DamageNumberManager.html">DamageNumberManager</a><ul class='methods'><li data-type='method'><a href="DamageNumberManager.html#addDamage">addDamage</a></li><li data-type='method'><a href="DamageNumberManager.html#render">render</a></li><li data-type='method'><a href="DamageNumberManager.html#update">update</a></li></ul></li><li></li><li><a href="Enemy.html">Enemy</a><ul class='methods'><li data-type='method'><a href="Enemy.html#getBounds">getBounds</a></li><li data-type='method'><a href="Enemy.html#getDamage">getDamage</a></li><li data-type='method'><a href="Enemy.html#getHeight">getHeight</a></li><li data-type='method'><a href="Enemy.html#getScoreValue">getScoreValue</a></li><li data-type='method'><a href="Enemy.html#getWidth">getWidth</a></li><li data-type='method'><a href="Enemy.html#getX">getX</a></li><li data-type='method'><a href="Enemy.html#getY">getY</a></li><li data-type='method'><a href="Enemy.html#isAlive">isAlive</a></li><li data-type='method'><a href="Enemy.html#moveTowardsPlayer">moveTowardsPlayer</a></li><li data-type='method'><a href="Enemy.html#render">render</a></li><li data-type='method'><a href="Enemy.html#takeDamage">takeDamage</a></li><li data-type='method'><a href="Enemy.html#update">update</a></li></ul></li><li></li><li><a href="Entity.html">Entity</a><ul class='methods'><li data-type='method'><a href="Entity.html#getBounds">getBounds</a></li><li data-type='method'><a href="Entity.html#getHeight">getHeight</a></li><li data-type='method'><a href="Entity.html#getWidth">getWidth</a></li><li data-type='method'><a href="Entity.html#getX">getX</a></li><li data-type='method'><a href="Entity.html#getY">getY</a></li><li data-type='method'><a href="Entity.html#isAlive">isAlive</a></li><li data-type='method'><a href="Entity.html#render">render</a></li><li data-type='method'><a href="Entity.html#takeDamage">takeDamage</a></li><li data-type='method'><a href="Entity.html#update">update</a></li></ul></li><li></li><li><a href="Projectile.html">Projectile</a><ul class='methods'><li data-type='method'><a href="Projectile.html#loadSprite">loadSprite</a></li><li data-type='method'><a href="Projectile.html#render">render</a></li><li data-type='method'><a href="Projectile.html#update">update</a></li></ul></li><li></li><li><a href="SoundManager.html">SoundManager</a><ul class='methods'><li data-type='method'><a href="SoundManager.html#playAttack">playAttack</a></li><li data-type='method'><a href="SoundManager.html#playDamage">playDamage</a></li><li data-type='method'><a href="SoundManager.html#playDeath">playDeath</a></li><li data-type='method'><a href="SoundManager.html#playSpellSound">playSpellSound</a></li><li data-type='method'><a href="SoundManager.html#setVolume">setVolume</a></li><li data-type='method'><a href="SoundManager.html#toggle">toggle</a></li></ul></li><li></li><li><a href="Spell.html">Spell</a><ul class='methods'><li data-type='method'><a href="Spell.html#canCast">canCast</a></li><li data-type='method'><a href="Spell.html#cast">cast</a></li><li data-type='method'><a href="Spell.html#deactivate">deactivate</a></li><li data-type='method'><a href="Spell.html#getBounds">getBounds</a></li><li data-type='method'><a href="Spell.html#getSpecialText">getSpecialText</a></li><li data-type='method'><a href="Spell.html#getStats">getStats</a></li><li data-type='method'><a href="Spell.html#isActive">isActive</a></li><li data-type='method'><a href="Spell.html#onCast">onCast</a></li><li data-type='method'><a href="Spell.html#render">render</a></li><li data-type='method'><a href="Spell.html#update">update</a></li><li data-type='method'><a href="Spell.html#upgrade">upgrade</a></li></ul></li><li></li></ul><h3>Global</h3><ul><li><a href="global.html#SPELL_DATA">SPELL_DATA</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+    <section class="package">
+        <h3> </h3>		
+    </section>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    <section class="readme usertext">
+        <article><h1>Vampire Survivors Clone - Csoportmunka</h1>
+<h2>📖 Leírás</h2>
+<blockquote>
+<p>Ez a projekt egy <strong>Vampire Survivors</strong> stílusú játék, ahol a játékos egy karaktert irányít, aki automatikusan támadja a közelében lévő ellenségeket. A cél a minél hosszabb ideig való túlélés, miközben különböző varázslatok és képességek feloldásával egyre erősebbé válunk. A játék során gyűjtött tapasztalati pontokért szintléphetünk, és új fegyvereket, varázslatokat szerezhetünk.</p>
+</blockquote>
+<h2>👥 Feladatok felosztása</h2>
+<h3><strong>Tomi</strong> - Ötletgazda &amp; Egyszerűbb feladatok</h3>
+<ul>
+<li>Adatfájlok szervezése (SpellData.js, adat.js készítése)</li>
+<li>README.md projekt leírás</li>
+<li>Asset szervezés és dokumentáció</li>
+<li>Egyszerű Cypress tesztek írása (útmutatóval)</li>
+<li>Játék tesztelés és hibák jelentése</li>
+<li>Ötletek dokumentálása új funkciókhoz</li>
+<li>HTML struktúra fejlesztése</li>
+</ul>
+<h3><strong>Marci</strong> - Művész &amp; Vizuális vezető</h3>
+<ul>
+<li>Sprite-ok szervezése és kezelése (Sprites/ mappa)</li>
+<li>CSS stílus tervezés és megvalósítás (index.html)</li>
+<li>Vizuális effektek implementálása</li>
+<li>DamageNumber.js - sérülés szám megjelenítés</li>
+<li>Background.js - háttér renderelés</li>
+<li>UI mockupok és drótvázak készítése</li>
+<li>Egyedi betűtípus sprite kezelés</li>
+<li>Halál képernyő grafikai tervezés</li>
+</ul>
+<h3><strong>Kevin</strong> - Programozás vezető &amp; AI használat</h3>
+<ul>
+<li>Játék logika core (Game.js, Player.js, Entity.js)</li>
+<li>Varázs rendszer implementálás (SpellManager.js, Spell.js)</li>
+<li>Spell típusok (ProjectileSpell, OrbitalSpell, AOESpell, stb.)</li>
+<li>Enemy.js - ellenség AI és mechanika</li>
+<li>Ütközésdetektálás optimalizálás</li>
+<li>Cypress teszt framework beállítása</li>
+<li>UML diagramok készítése (draw.io)</li>
+<li>Dokumentáció generálás AI eszközökkel</li>
+<li>Kód áttekintés és optimalizálás</li>
+<li>Duplikált kód eltávolítása</li>
+<li>SoundManager.js - hangrendszer</li>
+</ul>
+<h2>🎮 Osztályok</h2>
+<h3>1. <strong>Game</strong> - Főjáték vezérlő</h3>
+<p>A játék fő vezérlője, amely:</p>
+<ul>
+<li>Inicializálja az összes játék objektumot</li>
+<li>Futtatja a fő játékhurkot (game loop)</li>
+<li>Kezeli a kamera pozíciót</li>
+<li>Ellenőrzi az ütközéseket</li>
+<li>Rendereli a játék elemeket</li>
+<li>Menedzseli a pontszámot és statisztikákat</li>
+</ul>
+<h3>2. <strong>Entity</strong> - Alaposztály entitásokhoz</h3>
+<p>Absztrakt alaposztály minden játék entitáshoz:</p>
+<ul>
+<li>Közös tulajdonságok (pozíció, méret, életerő)</li>
+<li>Alap metódusok (update, render, takeDamage)</li>
+<li>Sprite animáció kezelés</li>
+<li>Hitbox számítás</li>
+</ul>
+<h3>3. <strong>Player</strong> (extends Entity) - Játékos karakter</h3>
+<p>A játékos karaktert reprezentálja:</p>
+<ul>
+<li>Mozgás kezelés (WASD/Arrow keys)</li>
+<li>Tapasztalati pont (XP) és szintlépés rendszer</li>
+<li>Dash (kitérés) képesség</li>
+<li>Ultimate képességek aktiválása</li>
+<li>SpellManager integráció</li>
+<li>Input kezelés</li>
+</ul>
+<h3>4. <strong>Enemy</strong> (extends Entity) - Ellenség</h3>
+<p>Ellenség entitás:</p>
+<ul>
+<li>Játékos követés AI</li>
+<li>Életerő skálázás játékidő alapján</li>
+<li>Sérülés értékek</li>
+<li>Pont érték halál esetén</li>
+<li>Animációk</li>
+</ul>
+<h3>5. <strong>SpellManager</strong> - Varázslat kezelő</h3>
+<p>Központi varázslat menedzser:</p>
+<ul>
+<li>Új varázslatok hozzáadása</li>
+<li>Varázslatok szintléptetése</li>
+<li>Varázslat kombinációk kezelése</li>
+<li>Upgrade opciók generálása</li>
+<li>Ultimate és Dash képességek</li>
+<li>Aktív varázslatok listája</li>
+</ul>
+<h3>6. <strong>Spell</strong> - Varázslat alaposztály</h3>
+<p>Varázslatok alaposztálya:</p>
+<ul>
+<li>Cooldown kezelés</li>
+<li>Szintléptetés</li>
+<li>Cast (varázslás) logika</li>
+<li>Bázis tulajdonságok</li>
+</ul>
+<h3>7. <strong>ProjectileSpell</strong> (extends Spell) - Lövedék varázslat</h3>
+<p>Lövedéket kilövő varázslatok:</p>
+<ul>
+<li>Célkövetés legközelebbi ellenséghez</li>
+<li>Lövedék generálás</li>
+<li>SpellProjectile objektumok kezelése</li>
+</ul>
+<h3>8. <strong>OrbitalSpell</strong> (extends Spell) - Keringő varázslat</h3>
+<p>Játékos körül keringő objektumok:</p>
+<ul>
+<li>Orbital objektumok kezelése</li>
+<li>Keringési mozgás számítás</li>
+<li>Folyamatos sérülés kezelés</li>
+</ul>
+<h3>9. <strong>AOESpell</strong> (extends Spell) - Terület hatású varázslat</h3>
+<p>Area of Effect (terület hatás) varázslatok:</p>
+<ul>
+<li>Robbanás animáció</li>
+<li>Terület sérülés számítás</li>
+<li>Ellenségek detektálása hatótávolságon belül</li>
+</ul>
+<h3>10. <strong>StaticAOESpell</strong> (extends Spell) - Statikus terület varázslat</h3>
+<p>Helyben maradó sérülés zónák:</p>
+<ul>
+<li>Zone (zóna) objektumok kezelése</li>
+<li>Folyamatos sérülés alkalmazás</li>
+<li>Időzített zónák</li>
+</ul>
+<h3>11. <strong>SkyFallSpell</strong> (extends Spell) - Égből hulló varázslat</h3>
+<p>Véletlen helyekre hulló projektilok:</p>
+<ul>
+<li>Véletlen pozíció generálás</li>
+<li>Meteor/esés effekt</li>
+<li>Terület sérülés</li>
+</ul>
+<h3>12. <strong>ShieldSpell</strong> (extends Spell) - Pajzs varázslat</h3>
+<p>Védő pajzs a játékos körül:</p>
+<ul>
+<li>Sérülés elnyelés</li>
+<li>Pajzs életerő kezelés</li>
+<li>Vizuális pajzs renderelés</li>
+</ul>
+<h3>13. <strong>MeleeSpell</strong> (extends Spell) - Közelharc varázslat</h3>
+<p>Közeli távolságú támadások:</p>
+<ul>
+<li>Közelség ellenőrzés</li>
+<li>Közvetlen sérülés alkalmazás</li>
+<li>Swing (csapás) animáció</li>
+</ul>
+<h3>14. <strong>Projectile</strong> - Lövedék objektum</h3>
+<p>Egyszerű lövedékek (player attack):</p>
+<ul>
+<li>Mozgás cél felé</li>
+<li>Élettartam kezelés</li>
+<li>Ütközés detekció</li>
+</ul>
+<h3>15. <strong>Background</strong> - Háttér</h3>
+<p>Végtelen scroll-ozó háttér:</p>
+<ul>
+<li>Textúra renderelés</li>
+<li>Kamera offset kezelés</li>
+<li>Tiling (csempézés)</li>
+</ul>
+<h3>16. <strong>SoundManager</strong> - Hang kezelő</h3>
+<p>Játék hangeffektek:</p>
+<ul>
+<li>Hang betöltés</li>
+<li>Hang lejátszás (attack, damage, death, spells)</li>
+<li>Hangerő szabályozás</li>
+<li>Némítás</li>
+</ul>
+<h3>17. <strong>DamageNumber</strong> - Sérülés szám</h3>
+<p>Lebegő sérülés számok:</p>
+<ul>
+<li>Animált szöveg megjelenítés</li>
+<li>Kritikus találat jelzés</li>
+<li>Fade out effekt</li>
+</ul>
+<h3>18. <strong>DamageNumberManager</strong> - Sérülés szám kezelő</h3>
+<p>DamageNumber objektumok kezelése:</p>
+<ul>
+<li>Új sérülés számok hozzáadása</li>
+<li>Update és renderelés</li>
+<li>Lejárt számok eltávolítása</li>
+</ul>
+<h2>📊 UML Ábrák</h2>
+<h3>Osztály diagram</h3>
+<p><a href="./UML.md">UML ábra megtekintése</a></p>
+<p>A teljes UML diagram megtekinthető a <code>UML.md</code> fájlban, amely tartalmazza:</p>
+<ul>
+<li>Osztály hierarchia</li>
+<li>Öröklődési kapcsolatok</li>
+<li>Kompozíciós kapcsolatok</li>
+<li>Főbb metódusok és tulajdonságok</li>
+</ul>
+<h2>🎯 Projektmenedzsment</h2>
+<p>A projekt feladatok kezelése a <a href="./PROJEKTMENEDZSMENT.md">PROJEKTMENEDZSMENT.md</a> fájlban található.</p>
+<p><strong>Főbb mérföldkövek:</strong></p>
+<ol>
+<li>✅ Alapjáték mechanika (mozgás, lövés, ellenségek)</li>
+<li>✅ Varázs rendszer implementálás</li>
+<li>✅ Sprite animációk és vizuális effektek</li>
+<li>🔄 Dokumentáció és UML</li>
+<li>⏳ Cypress tesztek</li>
+<li>⏳ Kód tisztítás és optimalizálás</li>
+</ol>
+<h2>🛠️ Technológiák</h2>
+<ul>
+<li><strong>HTML5 Canvas API</strong> - Játék renderelés</li>
+<li><strong>Vanilla JavaScript (ES6+)</strong> - Játék logika</li>
+<li><strong>CSS3</strong> - Külső stylesheet (style.css)</li>
+<li><strong>ES6 Modules</strong> - Modern module rendszer, dinamikus script betöltés</li>
+<li><strong>Cypress</strong> - E2E tesztelés</li>
+<li><strong>Draw.io</strong> - UML diagramok</li>
+<li><strong>Git &amp; GitHub</strong> - Verziókezelés</li>
+</ul>
+<h2>📁 Projekt struktúra</h2>
+<pre class="prettyprint source"><code>vampire_clone_csoportmunka/
+├── index.html              # Főoldal (csak index.js betöltése)
+├── style.css               # Külső CSS fájl (ÚJ!)
+├── index.js                # Belépési pont (dinamikus script betöltés)
+├── README.md               # Ez a fájl
+├── UML.md                  # UML diagramok
+├── SPECIFIKACIO.md         # Részletes specifikáció
+├── PROJEKTMENEDZSMENT.md   # Feladatok és mérföldkövek
+├── FEJLESZTOI_DOK.md       # Fejlesztői dokumentáció
+│
+├── Core Files/
+│   ├── Game.js             # Játék fő vezérlő
+│   ├── Entity.js           # Alaposztály
+│   ├── Player.js           # Játékos
+│   ├── Enemy.js            # Ellenség
+│   ├── Projectile.js       # Lövedék
+│   └── Background.js       # Háttér
+│
+├── Spell System/
+│   ├── Spell.js            # Varázslat alaposztály
+│   ├── SpellManager.js     # Varázs menedzser
+│   ├── SpellData.js        # Varázslat adatok
+│   └── SpellTypes/         # Varázslat típusok
+│       ├── ProjectileSpell.js
+│       ├── OrbitalSpell.js
+│       ├── AOESpell.js
+│       ├── StaticAOESpell.js
+│       ├── SkyFallSpell.js
+│       ├── ShieldSpell.js
+│       └── MeleeSpell.js
+│
+├── Managers/
+│   ├── SoundManager.js     # Hang kezelő
+│   └── DamageNumber.js     # Sérülés szám rendszer
+│
+├── Sprites/                # Képek és sprite-ok
+│   ├── enemies/
+│   ├── Projectile 2/
+│   └── ...
+│
+├── sound effects/          # Hangeffektek
+│
+└── cypress/                # E2E tesztek
+    ├── e2e/
+    └── support/
+</code></pre>
+<h3>🎯 Új architektúra jellemzői:</h3>
+<ul>
+<li>✅ <strong>Clean HTML</strong>: Csak <code>style.css</code> és <code>index.js</code> betöltése</li>
+<li>✅ <strong>Szeparált CSS</strong>: Minden stílus külön fájlban</li>
+<li>✅ <strong>Modern ES6</strong>: Module pattern, dinamikus importok</li>
+<li>✅ <strong>Egyszerű entry point</strong>: Egy fájl kezeli az egész betöltést</li>
+</ul>
+<h2>🎮 Játékmenet</h2>
+<h3>Irányítás</h3>
+<ul>
+<li><strong>Mozgás:</strong> WASD vagy Arrow keys</li>
+<li><strong>Támadás:</strong> Automatikus (legközelebbi ellenség)</li>
+<li><strong>Ultimate:</strong> 1-5 szám billentyűk (ha van feloldva)</li>
+<li><strong>Dash:</strong> Space (kitérés)</li>
+</ul>
+<h3>Debug módok</h3>
+<ul>
+<li><strong>U:</strong> Debug mód be/ki (hitbox-ok, statisztikák)</li>
+<li><strong>L:</strong> Azonnali szintlépés</li>
+<li><strong>I:</strong> Végtelen HP be/ki (debug módban)</li>
+<li><strong>H:</strong> Ellenség HP dupázás (debug módban)</li>
+<li><strong>K:</strong> Azonnali halál (debug módban)</li>
+<li><strong>P:</strong> Varázslat menü (debug módban)</li>
+</ul>
+<h3>Célok</h3>
+<ul>
+<li>Minél tovább túlélni</li>
+<li>Ellenségek legyőzése XP-ért</li>
+<li>Szintlépés és új varázslatok szerzése</li>
+<li>Különböző varázs kombinációk felfedezése</li>
+</ul>
+<h2>🔬 Tesztelés</h2>
+<p>A projekt Cypress E2E teszteket használ. További információ a <a href="./cypress/README.md">Cypress dokumentációban</a>.</p>
+<pre class="prettyprint source lang-bash"><code># Cypress futtatása
+npm run cypress:open
+</code></pre>
+<h2>🚀 Telepítés és futtatás</h2>
+<ol>
+<li>Klónozd a repositoryt:</li>
+</ol>
+<pre class="prettyprint source lang-bash"><code>git clone https://github.com/Boronen/vampire_clone_csoportmunka.git
+cd vampire_clone_csoportmunka
+</code></pre>
+<ol start="2">
+<li>Nyisd meg <code>index.html</code> fájlt böngészőben, vagy használj local servert:</li>
+</ol>
+<pre class="prettyprint source lang-bash"><code># Python
+python -m http.server 8000
+
+# Node.js (http-server)
+npx http-server
+</code></pre>
+<ol start="3">
+<li>Játék indítása:
+Nyisd meg böngészőben: <code>http://localhost:8000</code></li>
+</ol>
+<h2>📝 Dokumentáció linkek</h2>
+<ul>
+<li><a href="./SPECIFIKACIO.md">Részletes specifikáció</a></li>
+<li><a href="./PROJEKTMENEDZSMENT.md">Projektmenedzsment</a></li>
+<li><a href="./FEJLESZTOI_DOK.md">Fejlesztői dokumentáció</a></li>
+<li><a href="./UML.md">UML diagramok</a></li>
+<li><a href="./SPELL_SYSTEM.md">Spell rendszer dokumentáció</a></li>
+<li><a href="./SPRITE_ANALYSIS.md">Sprite analízis</a></li>
+</ul>
+<h2>🤝 Közreműködők</h2>
+<ul>
+<li><strong>Kevin</strong> - Programozás vezető, core logika, spell rendszer, AI</li>
+<li><strong>Marci</strong> - Művész, sprite-ok, vizuális effektek, CSS</li>
+<li><strong>Tomi</strong> - Ötletgazda, asset szervezés, tesztelés, dokumentáció</li>
+</ul>
+<h2>📄 Licenc</h2>
+<p>Ez a projekt oktatási célokat szolgál.</p>
+<hr>
+<p><strong>Státusz:</strong> 🔄 Aktív fejlesztés alatt</p>
+<p><strong>Verzió:</strong> 1.0.0</p>
+<p><strong>Utolsó frissítés:</strong> 2026.05.26</p></article>
+    </section>
+
+
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Tue May 26 2026 12:37:51 GMT+0200 (közép-európai nyári idő) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

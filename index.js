@@ -2,7 +2,17 @@
 // Main Entry Point - Initialize game
 // ============================================
 
-// Helper function to load scripts dynamically
+/**
+ * @file index.js - A játék belépési pontja
+ * @description Ez a fájl felelős a játék összes szkriptjének betöltéséért és a játék inicializálásáért.
+ * A szkriptek sorrendben töltődnek be a függőségek kezeléséhez.
+ */
+
+/**
+ * Dinamikusan betölt egy JavaScript fájlt.
+ * @param {string} src - A betöltendő script fájl elérési útja.
+ * @returns {Promise<void>} Promise, amely akkor teljesül, ha a script betöltődött.
+ */
 function loadScript(src) {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
@@ -13,7 +23,12 @@ function loadScript(src) {
     });
 }
 
-// Load all game scripts in the correct order
+/**
+ * Betölti az összes játék szkriptet a megfelelő sorrendben.
+ * A sorrend fontos a függőségek miatt (pl. Entity betöltése Player előtt).
+ * @async
+ * @returns {Promise<boolean>} True, ha minden szkript sikeresen betöltődött.
+ */
 async function loadGameScripts() {
     try {
         // Load core dependencies first
@@ -50,7 +65,10 @@ async function loadGameScripts() {
     }
 }
 
-// Initialize game after all scripts are loaded
+/**
+ * Inicializálja és elindítja a játékot az összes szkript betöltése után.
+ * Létrehozza a globális game objektumot, inicializálja és elindítja azt.
+ */
 loadGameScripts().then((success) => {
     if (success) {
         // ES6 modules are deferred by default, so DOM is already loaded
