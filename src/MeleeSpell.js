@@ -61,7 +61,7 @@ class MeleeSpell extends Spell {
                     if (this.knockbackForce > 0) {
                         const knockbackX = (dx / distance) * this.knockbackForce;
                         const knockbackY = (dy / distance) * this.knockbackForce;
-                        enemy.applyKnockback(knockbackX, knockbackY);
+
                     }
                 }
             }

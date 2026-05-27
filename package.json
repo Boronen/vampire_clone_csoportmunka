@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/Boronen/vampire_clone_csoportmunka#readme",
   "devDependencies": {
-    "cypress": "^15.15.0",
+    "cypress": "^15.16.0",
     "docdash": "^2.0.2",
     "jsdoc": "^4.0.5"
   }
