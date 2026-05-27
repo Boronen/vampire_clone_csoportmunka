@@ -161,10 +161,10 @@ class Game {
         // Render UI
         this.renderUI();
     }
-    renderCustomText(text, x, y, fontSize = 32) {
-    const letterWidth = 32;
-    const letterHeight = 32;
-    const scale = fontSize / 32;
+    renderCustomText(text, x, y, fontSize = 34) {
+    const letterWidth = 34;
+    const letterHeight = 34;
+    const scale = fontSize / 34;
     
     let currentX = x;
     
