@@ -69,6 +69,8 @@ describe('Vampire Survivors Clone - Game Tests', () => {
       })
     })
 
+      
+
     it('should have level and XP system', () => {
       cy.window().then((win) => {
         expect(win.game.player.level).to.equal(1)
@@ -83,6 +85,7 @@ describe('Vampire Survivors Clone - Game Tests', () => {
       })
     })
   })
+  
 
   // ============================================
   // 3. Enemy Tests
@@ -117,11 +120,13 @@ describe('Vampire Survivors Clone - Game Tests', () => {
       })
     })
   })
+/* eddig tomié*/
 
   // ============================================
   // 4. Input Handling Tests
   // ============================================
-  
+
+  /*kevin v*/
   describe('Player Input', () => {
     it('should respond to keyboard input', () => {
       cy.window().then((win) => {
@@ -139,6 +144,7 @@ describe('Vampire Survivors Clone - Game Tests', () => {
       })
     })
   })
+  /*kevin ^ */
 
   // ============================================
   // 5. Game State Tests
@@ -212,7 +218,8 @@ describe('Vampire Survivors Clone - Game Tests', () => {
   // ============================================
   // 7. Debug Mode Tests
   // ============================================
-  
+
+  /*kevin v */
   describe('Debug Mode', () => {
     it('should toggle debug mode with U key', () => {
       cy.window().then((win) => {
@@ -228,6 +235,7 @@ describe('Vampire Survivors Clone - Game Tests', () => {
       })
     })
   })
+  /*kevin^ */
 
   // ============================================
   // 8. Spell System Tests
@@ -280,7 +288,8 @@ describe('Vampire Survivors Clone - Game Tests', () => {
   // ============================================
   // 10. UI Tests
   // ============================================
-  
+
+  /*kevin V */
   describe('UI Elements', () => {
     it('should display controls section', () => {
       cy.get('.controls').should('exist')
@@ -292,3 +301,191 @@ describe('Vampire Survivors Clone - Game Tests', () => {
     })
   })
 })
+/*kevin ^ */
+
+/* K 
+describe('UI Elements', () => {
+    it('should display controls section', () => {
+      cy.get('.controls').should('exist')
+      cy.contains('Controls').should('be.visible')
+    })
+
+    it('should have game canvas focused area', () => {
+      cy.get('#gameCanvas').should('have.css', 'border')
+    })
+  })
+})
+describe('Debug Mode', () => {
+    it('should toggle debug mode with U key', () => {
+      cy.window().then((win) => {
+        const initialDebugMode = win.game.debugMode
+        
+        // Press U key
+        cy.get('body').type('u')
+        
+        cy.wait(100)
+        cy.window().then((win2) => {
+          expect(win2.game.debugMode).to.not.equal(initialDebugMode)
+        })
+      })
+    })
+  })
+ describe('Player Input', () => {
+    it('should respond to keyboard input', () => {
+      cy.window().then((win) => {
+        const initialX = win.game.player.x
+        const initialY = win.game.player.y
+        
+        // Simulate key press
+        cy.get('body').type('d')
+        cy.wait(100)
+        
+        cy.window().then((win2) => {
+          // Player should have moved (or keys object updated)
+          expect(win2.game.player.keys).to.exist
+        })
+      })
+    })
+  })
+describe('Performance', () => {
+    it('should maintain reasonable entity count', () => {
+      cy.window().then((win) => {
+        // Wait for some gameplay
+        cy.wait(3000)
+        
+        cy.window().then((win2) => {
+          const totalEntities = win2.game.enemies.length + 
+                               win2.game.projectiles.length
+          
+          // Should not have excessive entities
+          expect(totalEntities).to.be.lessThan(300)
+        })
+      })
+    })
+  })
+  describe('Enemy System', () => {
+    it('should spawn initial enemies', () => {
+      cy.window().then((win) => {
+        expect(win.game.enemies.length).to.be.greaterThan(0)
+      })
+    })
+
+    it('should have enemy properties', () => {
+      cy.window().then((win) => {
+        const enemy = win.game.enemies[0]
+        expect(enemy).to.exist
+        expect(enemy.x).to.be.a('number')
+        expect(enemy.y).to.be.a('number')
+        expect(enemy.health).to.be.greaterThan(0)
+        expect(enemy.speed).to.be.greaterThan(0)
+      })
+    })
+
+    it('should spawn more enemies over time', () => {
+      cy.window().then((win) => {
+        const initialCount = win.game.enemies.length
+        // Wait for enemy spawn interval (1 second)
+        cy.wait(2000)
+        cy.window().then((win2) => {
+          expect(win2.game.enemies.length).to.be.greaterThan(initialCount)
+        })
+      })
+    })
+  })
+  enemy system 3
+  perfomance  1
+  player input 1
+  debug 1
+  ui elements 2
+  all 8
+*/
+
+/* M 
+ describe('Game State Management', () => {
+    it('should track game time', () => {
+      cy.window().then((win) => {
+        expect(win.game.gameTime).to.be.a('number')
+        expect(win.game.gameTime).to.be.at.least(0)
+      })
+    })
+
+    it('should track score', () => {
+      cy.window().then((win) => {
+        expect(win.game.score).to.be.a('number')
+        expect(win.game.score).to.be.at.least(0)
+      })
+    })
+
+    it('should have background', () => {
+      cy.window().then((win) => {
+        expect(win.game.background).to.exist
+      })
+    })
+
+    it('should have sound manager', () => {
+      cy.window().then((win) => {
+        expect(win.game.soundManager).to.exist
+      })
+    })
+
+    it('should have damage number manager', () => {
+      cy.window().then((win) => {
+        expect(win.game.damageNumbers).to.exist
+      })
+    })
+  })
+describe('Level Up System', () => {
+    it('should show upgrade menu on level up', () => {
+      cy.window().then((win) => {
+        // Force level up
+        win.game.player.gainXP(win.game.player.xpToNextLevel)
+        
+        cy.wait(100)
+        cy.window().then((win2) => {
+          expect(win2.game.upgradeMenuVisible).to.be.true
+          expect(win2.game.isPaused).to.be.true
+        })
+      })
+    })
+
+    it('should provide upgrade options', () => {
+      cy.window().then((win) => {
+        win.game.player.gainXP(win.game.player.xpToNextLevel)
+        
+        cy.wait(100)
+        cy.window().then((win2) => {
+          expect(win2.game.upgradeOptions).to.exist
+          expect(win2.game.upgradeOptions.length).to.equal(3)
+        })
+      })
+    })
+  })
+ describe('Spell System', () => {
+    it('should have SPELL_DATA available', () => {
+      cy.window().then((win) => {
+        expect(win.SPELL_DATA).to.exist
+        expect(Object.keys(win.SPELL_DATA).length).to.be.greaterThan(0)
+      })
+    })
+
+    it('should be able to add spells', () => {
+      cy.window().then((win) => {
+        const initialSpellCount = win.game.player.spellManager.getSpellCount()
+        
+        // Add a spell
+        win.game.player.spellManager.addSpell('magicSpell')
+        
+        cy.window().then((win2) => {
+          const newSpellCount = win2.game.player.spellManager.getSpellCount()
+          expect(newSpellCount).to.be.greaterThan(initialSpellCount)
+        })
+      })
+    })
+  })
+spell system 2
+lvl system 2
+game state management 5
+all 9
+
+
+*/
