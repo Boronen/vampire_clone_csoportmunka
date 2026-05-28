@@ -560,6 +560,29 @@ class Game {
             this.ctx.fillText(`- ${spell.name} Lv${spell.level}`, 30, y);
             y += 20;
         }
+        
+        // Enemy variety info
+        y += 10;
+        this.ctx.fillStyle = 'cyan';
+        this.ctx.fillText('=== ENEMY TYPES ===', 20, y);
+        y += 20;
+        
+        // Count enemies by type
+        const enemyCounts = {};
+        for (const enemy of this.enemies) {
+            const type = enemy.enemyType.id;
+            enemyCounts[type] = (enemyCounts[type] || 0) + 1;
+        }
+        
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(`Total Enemies: ${this.enemies.length}`, 20, y);
+        y += 20;
+        
+        for (const [type, count] of Object.entries(enemyCounts)) {
+            const typeName = ENEMY_TYPES[type]?.name || type;
+            this.ctx.fillText(`- ${typeName}: ${count}`, 30, y);
+            y += 20;
+        }
     }
 
     spawnEnemy() {
