@@ -3,11 +3,10 @@
 // ============================================
 
 // Constants
-const BASE_URL = "https://boronen.github.io/vampire_clone_csoportmunka/";
+const BASE_URL = "/";
 const WAIT_TIME_SHORT = 100;
 const WAIT_TIME_MEDIUM = 500;
 const WAIT_TIME_LONG = 2000;
-
 /**
  * Initialize game and wait for full loading
  */
