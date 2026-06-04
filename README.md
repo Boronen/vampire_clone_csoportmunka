@@ -326,4 +326,4 @@ Ez a projekt oktatási célokat szolgál.
 
 **Verzió:** 1.0.0
 
-**Utolsó frissítés:** 2026.05.26
+**Utolsó frissítés:** 2026.06.04
