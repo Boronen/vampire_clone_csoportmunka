@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Global - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Background.html">Background</a><ul class='methods'><li data-type='method'><a href="Background.html#isLoaded">isLoaded</a></li><li data-type='method'><a href="Background.html#render">render</a></li></ul></li><li></li><li><a href="DamageNumber.html">DamageNumber</a><ul class='methods'><li data-type='method'><a href="DamageNumber.html#render">render</a></li><li data-type='method'><a href="DamageNumber.html#update">update</a></li></ul></li><li></li><li><a href="DamageNumberManager.html">DamageNumberManager</a><ul class='methods'><li data-type='method'><a href="DamageNumberManager.html#addDamage">addDamage</a></li><li data-type='method'><a href="DamageNumberManager.html#render">render</a></li><li data-type='method'><a href="DamageNumberManager.html#update">update</a></li></ul></li><li></li><li><a href="Enemy.html">Enemy</a><ul class='methods'><li data-type='method'><a href="Enemy.html#getBounds">getBounds</a></li><li data-type='method'><a href="Enemy.html#getDamage">getDamage</a></li><li data-type='method'><a href="Enemy.html#getHeight">getHeight</a></li><li data-type='method'><a href="Enemy.html#getScoreValue">getScoreValue</a></li><li data-type='method'><a href="Enemy.html#getWidth">getWidth</a></li><li data-type='method'><a href="Enemy.html#getX">getX</a></li><li data-type='method'><a href="Enemy.html#getY">getY</a></li><li data-type='method'><a href="Enemy.html#isAlive">isAlive</a></li><li data-type='method'><a href="Enemy.html#moveTowardsPlayer">moveTowardsPlayer</a></li><li data-type='method'><a href="Enemy.html#render">render</a></li><li data-type='method'><a href="Enemy.html#takeDamage">takeDamage</a></li><li data-type='method'><a href="Enemy.html#update">update</a></li></ul></li><li></li><li><a href="Entity.html">Entity</a><ul class='methods'><li data-type='method'><a href="Entity.html#getBounds">getBounds</a></li><li data-type='method'><a href="Entity.html#getHeight">getHeight</a></li><li data-type='method'><a href="Entity.html#getWidth">getWidth</a></li><li data-type='method'><a href="Entity.html#getX">getX</a></li><li data-type='method'><a href="Entity.html#getY">getY</a></li><li data-type='method'><a href="Entity.html#isAlive">isAlive</a></li><li data-type='method'><a href="Entity.html#render">render</a></li><li data-type='method'><a href="Entity.html#takeDamage">takeDamage</a></li><li data-type='method'><a href="Entity.html#update">update</a></li></ul></li><li></li><li><a href="Projectile.html">Projectile</a><ul class='methods'><li data-type='method'><a href="Projectile.html#loadSprite">loadSprite</a></li><li data-type='method'><a href="Projectile.html#render">render</a></li><li data-type='method'><a href="Projectile.html#update">update</a></li></ul></li><li></li><li><a href="SoundManager.html">SoundManager</a><ul class='methods'><li data-type='method'><a href="SoundManager.html#playAttack">playAttack</a></li><li data-type='method'><a href="SoundManager.html#playDamage">playDamage</a></li><li data-type='method'><a href="SoundManager.html#playDeath">playDeath</a></li><li data-type='method'><a href="SoundManager.html#playSpellSound">playSpellSound</a></li><li data-type='method'><a href="SoundManager.html#setVolume">setVolume</a></li><li data-type='method'><a href="SoundManager.html#toggle">toggle</a></li></ul></li><li></li><li><a href="Spell.html">Spell</a><ul class='methods'><li data-type='method'><a href="Spell.html#canCast">canCast</a></li><li data-type='method'><a href="Spell.html#cast">cast</a></li><li data-type='method'><a href="Spell.html#deactivate">deactivate</a></li><li data-type='method'><a href="Spell.html#getBounds">getBounds</a></li><li data-type='method'><a href="Spell.html#getSpecialText">getSpecialText</a></li><li data-type='method'><a href="Spell.html#getStats">getStats</a></li><li data-type='method'><a href="Spell.html#isActive">isActive</a></li><li data-type='method'><a href="Spell.html#onCast">onCast</a></li><li data-type='method'><a href="Spell.html#render">render</a></li><li data-type='method'><a href="Spell.html#update">update</a></li><li data-type='method'><a href="Spell.html#upgrade">upgrade</a></li></ul></li><li></li></ul><h3>Global</h3><ul><li><a href="global.html#SPELL_DATA">SPELL_DATA</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Global</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        
+            
+        
+        </h2>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+            
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="SPELL_DATA"><span class="type-signature type-signature-constant">(constant) </span>SPELL_DATA<span class="type-signature"> :Object.&lt;string, <a href="global.html#SpellDataObject">SpellDataObject</a>></span></h4>
+
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Az összes játékbeli varázslat adatait tartalmazó objektum.
+Tartalmazza az ultimate, aktív, passzív, lövedék, orbitális, AOE, pajzs és közelharcvarázslatok összes statisztikáját.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SpellData.js.html">SpellData.js</a>, <a href="SpellData.js.html#line36">line 36</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Az összes játékbeli varázslat adatait tartalmazó objektum.
+Tartalmazza az ultimate, aktív, passzív, lövedék, orbitális, AOE, pajzs és közelharcvarázslatok összes statisztikáját.</p>
+</div>
+
+
+
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object.&lt;string, <a href="global.html#SpellDataObject">SpellDataObject</a>></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="SpellDataObject">SpellDataObject</h4>
+
+
+
+
+
+<dl class="details">
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SpellData.js.html">SpellData.js</a>, <a href="SpellData.js.html#line6">line 6</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A varázslat egyedi azonosítója</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A varázslat megjelenítési neve</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>description</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A varázslat leírása</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A varázslat típusa ('passive', 'ultimate', 'active')</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>spellClass</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A varázslat osztálya ('projectile', 'aoe', 'orbital', 'shield', 'melee')</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sprite</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A sprite kép elérési útja</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>frameCount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Az animációs képkockák száma</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A varázslat szélessége pixelben</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A varázslat magassága pixelben</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>damage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Az alap sebzés</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cooldown</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A lehűlési idő milliszekundumban</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>range</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A hatótáv (projectile típusnál)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>speed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A sebesség (projectile típusnál)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>projectileCount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A lövedékek száma</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>aoeRadius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Az AOE hatósugara</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Az időtartam milliszekundumban</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>piercing</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Átütő-e a lövedék</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>homing</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Követő-e a lövedék</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>chainCount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A láncreakciók száma</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>combinesWith</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Milyen varázslatokkal kombinálható</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>combinedResult</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Mi lesz a kombinációból</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Tue May 26 2026 12:37:51 GMT+0200 (közép-európai nyári idő) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

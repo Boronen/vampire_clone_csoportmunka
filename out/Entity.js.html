@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Entity.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Background.html">Background</a><ul class='methods'><li data-type='method'><a href="Background.html#isLoaded">isLoaded</a></li><li data-type='method'><a href="Background.html#render">render</a></li></ul></li><li></li><li><a href="DamageNumber.html">DamageNumber</a><ul class='methods'><li data-type='method'><a href="DamageNumber.html#render">render</a></li><li data-type='method'><a href="DamageNumber.html#update">update</a></li></ul></li><li></li><li><a href="DamageNumberManager.html">DamageNumberManager</a><ul class='methods'><li data-type='method'><a href="DamageNumberManager.html#addDamage">addDamage</a></li><li data-type='method'><a href="DamageNumberManager.html#render">render</a></li><li data-type='method'><a href="DamageNumberManager.html#update">update</a></li></ul></li><li></li><li><a href="Enemy.html">Enemy</a><ul class='methods'><li data-type='method'><a href="Enemy.html#getBounds">getBounds</a></li><li data-type='method'><a href="Enemy.html#getDamage">getDamage</a></li><li data-type='method'><a href="Enemy.html#getHeight">getHeight</a></li><li data-type='method'><a href="Enemy.html#getScoreValue">getScoreValue</a></li><li data-type='method'><a href="Enemy.html#getWidth">getWidth</a></li><li data-type='method'><a href="Enemy.html#getX">getX</a></li><li data-type='method'><a href="Enemy.html#getY">getY</a></li><li data-type='method'><a href="Enemy.html#isAlive">isAlive</a></li><li data-type='method'><a href="Enemy.html#moveTowardsPlayer">moveTowardsPlayer</a></li><li data-type='method'><a href="Enemy.html#render">render</a></li><li data-type='method'><a href="Enemy.html#takeDamage">takeDamage</a></li><li data-type='method'><a href="Enemy.html#update">update</a></li></ul></li><li></li><li><a href="Entity.html">Entity</a><ul class='methods'><li data-type='method'><a href="Entity.html#getBounds">getBounds</a></li><li data-type='method'><a href="Entity.html#getHeight">getHeight</a></li><li data-type='method'><a href="Entity.html#getWidth">getWidth</a></li><li data-type='method'><a href="Entity.html#getX">getX</a></li><li data-type='method'><a href="Entity.html#getY">getY</a></li><li data-type='method'><a href="Entity.html#isAlive">isAlive</a></li><li data-type='method'><a href="Entity.html#render">render</a></li><li data-type='method'><a href="Entity.html#takeDamage">takeDamage</a></li><li data-type='method'><a href="Entity.html#update">update</a></li></ul></li><li></li><li><a href="Projectile.html">Projectile</a><ul class='methods'><li data-type='method'><a href="Projectile.html#loadSprite">loadSprite</a></li><li data-type='method'><a href="Projectile.html#render">render</a></li><li data-type='method'><a href="Projectile.html#update">update</a></li></ul></li><li></li><li><a href="SoundManager.html">SoundManager</a><ul class='methods'><li data-type='method'><a href="SoundManager.html#playAttack">playAttack</a></li><li data-type='method'><a href="SoundManager.html#playDamage">playDamage</a></li><li data-type='method'><a href="SoundManager.html#playDeath">playDeath</a></li><li data-type='method'><a href="SoundManager.html#playSpellSound">playSpellSound</a></li><li data-type='method'><a href="SoundManager.html#setVolume">setVolume</a></li><li data-type='method'><a href="SoundManager.html#toggle">toggle</a></li></ul></li><li></li><li><a href="Spell.html">Spell</a><ul class='methods'><li data-type='method'><a href="Spell.html#canCast">canCast</a></li><li data-type='method'><a href="Spell.html#cast">cast</a></li><li data-type='method'><a href="Spell.html#deactivate">deactivate</a></li><li data-type='method'><a href="Spell.html#getBounds">getBounds</a></li><li data-type='method'><a href="Spell.html#getSpecialText">getSpecialText</a></li><li data-type='method'><a href="Spell.html#getStats">getStats</a></li><li data-type='method'><a href="Spell.html#isActive">isActive</a></li><li data-type='method'><a href="Spell.html#onCast">onCast</a></li><li data-type='method'><a href="Spell.html#render">render</a></li><li data-type='method'><a href="Spell.html#update">update</a></li><li data-type='method'><a href="Spell.html#upgrade">upgrade</a></li></ul></li><li></li></ul><h3>Global</h3><ul><li><a href="global.html#SPELL_DATA">SPELL_DATA</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Entity.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// ============================================
+// Entity Class - Base class for Player and Enemy
+// ============================================
+
+/**
+ * @class Entity
+ * @classdesc Alaposztály a játékban szereplő élőlényekhez (játékos és ellenségek). 
+ * Kezeli az animációt, életpontokat, sprite-ok betöltését és megjelenítését.
+ */
+class Entity {
+    /**
+     * Létrehoz egy új Entity példányt.
+     * @param {number} x - Az entitás kezdő X koordinátája.
+     * @param {number} y - Az entitás kezdő Y koordinátája.
+     * @param {number} width - Az entitás szélessége pixelben.
+     * @param {number} height - Az entitás magassága pixelben.
+     * @param {number} speed - Az entitás mozgási sebessége.
+     * @param {number} health - Az entitás kezdő életpontja.
+     * @param {string} spritePath - A sprite kép fájl elérési útja.
+     * @param {number} [frameCount=1] - Az animációs képkockák száma a sprite-ban.
+     */
+    constructor(x, y, width, height, speed, health, spritePath, frameCount = 1) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.speed = speed;
+        this.health = health;
+        this.maxHealth = health;
+        this.sprite = new Image();
+        this.spriteLoaded = false;
+        this.sprite.onload = () => {
+            this.spriteLoaded = true;
+            this.frameWidth = this.sprite.width / this.frameCount;
+            this.frameHeight = this.sprite.height;
+        };
+        this.sprite.src = spritePath;
+        
+        // Animation properties
+        this.frameCount = frameCount;
+        this.currentFrame = 0;
+        this.frameTimer = 0;
+        this.frameInterval = 0.1; // 100ms per frame
+        this.frameWidth = width;
+        this.frameHeight = height;
+        
+        // Direction for sprite flipping
+        this.facingLeft = false;
+    }
+
+    /**
+     * Frissíti az entitás állapotát minden képkockában.
+     * Kezeli az animáció léptetését.
+     * @param {number} deltaTime - Az előző képkocka óta eltelt idő másodpercben.
+     */
+    update(deltaTime) {
+        // Update animation
+        this.frameTimer += deltaTime;
+        if (this.frameTimer >= this.frameInterval) {
+            this.currentFrame = (this.currentFrame + 1) % this.frameCount;
+            this.frameTimer = 0;
+        }
+    }
+
+    /**
+     * Megjeleníti az entitást a canvason.
+     * Kezeli a sprite tükrözését és az életpont sáv megjelenítését.
+     * @param {CanvasRenderingContext2D} ctx - A canvas 2D kontextusa.
+     * @param {number} cameraX - A kamera X pozíciója.
+     * @param {number} cameraY - A kamera Y pozíciója.
+     */
+    render(ctx, cameraX, cameraY) {
+        if (this.spriteLoaded) {
+            ctx.save();
+            
+            // Flip sprite if facing left
+            if (this.facingLeft) {
+                ctx.translate(this.x - cameraX + this.width, this.y - cameraY);
+                ctx.scale(-1, 1);
+                ctx.drawImage(
+                    this.sprite,
+                    this.currentFrame * this.frameWidth,
+                    0,
+                    this.frameWidth,
+                    this.frameHeight,
+                    0,
+                    0,
+                    this.width,
+                    this.height
+                );
+            } else {
+                ctx.drawImage(
+                    this.sprite,
+                    this.currentFrame * this.frameWidth,
+                    0,
+                    this.frameWidth,
+                    this.frameHeight,
+                    this.x - cameraX,
+                    this.y - cameraY,
+                    this.width,
+                    this.height
+                );
+            }
+            
+            ctx.restore();
+        } else {
+            // Draw placeholder rectangle if sprite not loaded
+            ctx.fillStyle = 'gray';
+            ctx.fillRect(this.x - cameraX, this.y - cameraY, this.width, this.height);
+        }
+
+        // Draw health bar
+        const healthBarWidth = this.width;
+        const healthBarHeight = 5;
+        const healthPercent = this.health / this.maxHealth;
+        
+        ctx.fillStyle = 'red';
+        ctx.fillRect(this.x - cameraX, this.y - cameraY - 10, healthBarWidth, healthBarHeight);
+        ctx.fillStyle = 'green';
+        ctx.fillRect(this.x - cameraX, this.y - cameraY - 10, healthBarWidth * healthPercent, healthBarHeight);
+    }
+
+    /**
+     * Sebzést okoz az entitásnak és megjeleníti a sebzésszámot.
+     * @param {number} amount - A sebzés mennyisége.
+     */
+    takeDamage(amount) {
+        this.health -= amount;
+        if (this.health &lt; 0) this.health = 0;
+        
+        // Show damage number if game exists
+        if (this.game &amp;&amp; this.game.damageNumbers) {
+            const x = this.x + this.width / 2;
+            const y = this.y + this.height / 4;
+            this.game.damageNumbers.addDamage(x, y, amount, false);
+        }
+        
+        // Play damage sound for player
+        if (this.game &amp;&amp; this.game.soundManager &amp;&amp; this === this.game.player) {
+            this.game.soundManager.playDamage();
+        }
+    }
+
+    /**
+     * Ellenőrzi, hogy az entitás életben van-e.
+     * @returns {boolean} True, ha az entitásnak van életpontja.
+     */
+    isAlive() {
+        return this.health > 0;
+    }
+
+    /**
+     * Visszaadja az entitás X koordinátáját.
+     * @returns {number} Az X koordináta.
+     */
+    getX() {
+        return this.x;
+    }
+
+    /**
+     * Visszaadja az entitás Y koordinátáját.
+     * @returns {number} Az Y koordináta.
+     */
+    getY() {
+        return this.y;
+    }
+
+    /**
+     * Visszaadja az entitás szélességét.
+     * @returns {number} A szélesség pixelben.
+     */
+    getWidth() {
+        return this.width;
+    }
+
+    /**
+     * Visszaadja az entitás magasságát.
+     * @returns {number} A magasság pixelben.
+     */
+    getHeight() {
+        return this.height;
+    }
+
+    /**
+     * Visszaadja az entitás ütközési határait.
+     * @returns {{x: number, y: number, width: number, height: number}} Az ütközési téglalap.
+     */
+    getBounds() {
+        return {
+            x: this.x,
+            y: this.y,
+            width: this.width,
+            height: this.height
+        };
+    }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Tue May 26 2026 12:37:51 GMT+0200 (közép-európai nyári idő) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
