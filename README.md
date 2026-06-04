@@ -180,8 +180,8 @@ A projekt feladatok kezelése a [PROJEKTMENEDZSMENT.md](./PROJEKTMENEDZSMENT.md)
 1. ✅ Alapjáték mechanika (mozgás, lövés, ellenségek)
 2. ✅ Varázs rendszer implementálás
 3. ✅ Sprite animációk és vizuális effektek
-4. 🔄 Dokumentáció és UML
-5. ⏳ Cypress tesztek
+4. ✅ Dokumentáció és UML
+5. ✅ Cypress tesztek
 6. ⏳ Kód tisztítás és optimalizálás
 
 ## 🛠️ Technológiák
